@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7a92b99e-4d1e-4fec-bf7e-05a89671241c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1UNEyip1ykkPHhu453GvnVGp3U2" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/opinions/simulate" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyDependenciesConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-simulation\src\opinions\simulate" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.application">
+    <configuration name="application" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-simulation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/opinions/simulate" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/opinions/simulate/application.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dynamics" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-simulation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/opinions/simulate" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/opinions/simulate/dynamics.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="grand simulation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/opinions/simulate/simulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="opinion" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-core" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/opinion.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="reference" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-core" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/reference.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.dynamics" />
+      <item itemvalue="Python.opinion" />
+      <item itemvalue="Python.reference" />
+      <item itemvalue="Python.grand simulation" />
+      <item itemvalue="Python.application" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.application" />
+        <item itemvalue="Python.grand simulation" />
+        <item itemvalue="Python.dynamics" />
+        <item itemvalue="Python.opinion" />
+        <item itemvalue="Python.reference" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_FROM_SOURCE" value="true" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7a92b99e-4d1e-4fec-bf7e-05a89671241c" name="Default Changelist" comment="" />
+      <created>1575557235490</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575557235490</updated>
+      <workItem from="1575557236781" duration="47427000" />
+      <workItem from="1575690769211" duration="11603000" />
+      <workItem from="1575703142152" duration="8452000" />
+      <workItem from="1575714505189" duration="565000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575691621638">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1575691621638" />
+    <state x="413" y="133" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575691521368">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="413" y="133" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.768@0.0.1366.768" timestamp="1575691521367" />
+    <state x="409" y="22" key="#reference" timestamp="1575558204628">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="409" y="22" key="#reference/0.0.1366.768@0.0.1366.768" timestamp="1575558204628" />
+    <state width="1230" height="466" key="DebuggerActiveHint" timestamp="1575699816788">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1230" height="466" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1575699816788" />
+    <state x="463" y="141" key="FileChooserDialogImpl" timestamp="1575689533418">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="463" y="141" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1575689533418" />
+    <state x="528" y="281" key="Github.ShareDialog" timestamp="1575713933922">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="528" y="281" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1575713933922" />
+    <state width="1323" height="192" key="GridCell.Tab.0.bottom" timestamp="1575707629168">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575707629168" />
+    <state width="1323" height="192" key="GridCell.Tab.0.center" timestamp="1575707629167">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1575707629167" />
+    <state width="1323" height="192" key="GridCell.Tab.0.left" timestamp="1575707629166">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1575707629166" />
+    <state width="1323" height="192" key="GridCell.Tab.0.right" timestamp="1575707629167">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1575707629167" />
+    <state width="1323" height="238" key="GridCell.Tab.1.bottom" timestamp="1575703108670">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="238" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575703108670" />
+    <state width="1323" height="238" key="GridCell.Tab.1.center" timestamp="1575703108669">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="238" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
+    <state width="1323" height="238" key="GridCell.Tab.1.left" timestamp="1575703108669">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="238" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
+    <state width="1323" height="238" key="GridCell.Tab.1.right" timestamp="1575703108669">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1323" height="238" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
+    <state x="192" y="13" key="SettingsEditor" timestamp="1575691767707">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="192" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1575691767707" />
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1575714508980">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1575714508980" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1575688032879">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="550" height="500" key="javadoc.popup.new" timestamp="1575680218422">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="550" height="500" key="javadoc.popup.new/0.0.1366.768@0.0.1366.768" timestamp="1575680218422" />
+    <state width="600" height="424" key="javadoc.popup/0.0.1366.768@0.0.1366.768" timestamp="1575688032879" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://C:/ProgramData/Anaconda3/Lib/site-packages/networkx/generators/directed.py</url>
+          <line>286</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/opinions/simulate/application.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$opinion.coverage" NAME="opinion Coverage Results" MODIFIED="1575558230456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$reference.coverage" NAME="reference Coverage Results" MODIFIED="1575558204862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$application.coverage" NAME="application Coverage Results" MODIFIED="1575707629126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$simulation.coverage" NAME="grand simulation Coverage Results" MODIFIED="1575691811747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$dynamics.coverage" NAME="dynamics Coverage Results" MODIFIED="1575558679209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
+  </component>
+</project>

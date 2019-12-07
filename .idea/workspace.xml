@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7fecb61d-171f-4070-b9f2-587ee82a42ad" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="pyOpinions" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TxMtvC45b578Nd3Yb2JVojAdhu" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pyOpinions-simulation/src" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-simulation\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-io\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-graphs\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-core\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-io\src\opinions" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-core\src\opinions" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-graphs\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-core\src" />
+      <recent name="C:\Users\Amr\PycharmProjects\pyOpinions\pyOpinions-core\opinions.objects\objects" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.opinion">
+    <configuration name="opinion" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-core" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects/opinion.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="reference" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions-core" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects/reference.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="simulation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyOpinions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pyOpinions-simulation/src/opinions/simulate" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyOpinions-simulation/src/opinions/simulate/simulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.opinion" />
+      <item itemvalue="Python.reference" />
+      <item itemvalue="Python.simulation" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.opinion" />
+        <item itemvalue="Python.simulation" />
+        <item itemvalue="Python.reference" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_FROM_SOURCE" value="true" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7fecb61d-171f-4070-b9f2-587ee82a42ad" name="Default Changelist" comment="" />
+      <created>1574666939611</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574666939611</updated>
+      <workItem from="1574666941268" duration="23580000" />
+      <workItem from="1574856444930" duration="78671000" />
+      <workItem from="1575434592363" duration="25665000" />
+      <workItem from="1575521314548" duration="15268000" />
+      <workItem from="1575548571200" duration="830000" />
+      <workItem from="1575549471597" duration="1937000" />
+      <workItem from="1575551839493" duration="608000" />
+      <workItem from="1575552482006" duration="4365000" />
+      <workItem from="1575556895858" duration="250000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575555988987">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1575555988987" />
+    <state x="363" y="114" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575551848619">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="363" y="114" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.768@0.0.1366.768" timestamp="1575551848619" />
+    <state x="302" y="22" width="654" height="724" key="#simulation" timestamp="1575555953550">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="302" y="22" width="654" height="724" key="#simulation/0.0.1366.768@0.0.1366.768" timestamp="1575555953550" />
+    <state width="879" height="246" key="GridCell.Tab.0.bottom" timestamp="1575556861427">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="879" height="246" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575556861427" />
+    <state width="879" height="246" key="GridCell.Tab.0.center" timestamp="1575556861427">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="879" height="246" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1575556861427" />
+    <state width="879" height="246" key="GridCell.Tab.0.left" timestamp="1575556861426">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="879" height="246" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1575556861426" />
+    <state width="879" height="246" key="GridCell.Tab.0.right" timestamp="1575556861427">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="879" height="246" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1575556861427" />
+    <state x="116" y="21" key="SettingsEditor" timestamp="1575556849179">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="116" y="21" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1575556849179" />
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1575556899808">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1575556899808" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pyOpinions-simulation/src/opinions/simulate/simulation.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pyOpinions$reference.coverage" NAME="reference Coverage Results" MODIFIED="1575555898049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects" />
+    <SUITE FILE_PATH="coverage/pyOpinions$simulation.coverage" NAME="simulation Coverage Results" MODIFIED="1575556024027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pyOpinions-simulation/src/opinions/simulate" />
+    <SUITE FILE_PATH="coverage/pyOpinions$opinion.coverage" NAME="opinion Coverage Results" MODIFIED="1575556623703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pyOpinions-core/src/opinions/objects" />
+  </component>
+</project>

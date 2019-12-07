@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/pyOpinions.iml" filepath="$PROJECT_DIR$/.idea/pyOpinions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pyOpinions-core/.idea/pyOpinions-core.iml" filepath="$PROJECT_DIR$/pyOpinions-core/.idea/pyOpinions-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pyOpinions-graphs/.idea/pyOpinions-graphs.iml" filepath="$PROJECT_DIR$/pyOpinions-graphs/.idea/pyOpinions-graphs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pyOpinions-io/.idea/pyOpinions-io.iml" filepath="$PROJECT_DIR$/pyOpinions-io/.idea/pyOpinions-io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pyOpinions-simulation/.idea/pyOpinions-simulation.iml" filepath="$PROJECT_DIR$/pyOpinions-simulation/.idea/pyOpinions-simulation.iml" />
+    </modules>
+  </component>
+</project>
