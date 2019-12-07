@@ -11,10 +11,10 @@ def normalize_matrix(matrix: np.ndarray) -> np.ndarray:
 
 
 def randomize_matrix(matrix: np.ndarray, random: Random):
-    # TODO I am replace python random.Random with numpy random.RandomState later
+    # TODO I may replace python random.Random with numpy random.RandomState later
     random.random()  # ensure different state every function call, even if the outer random is not called in between
     r = np.random.RandomState(random.getstate()[1])
-    matrix[:] = r.random_sample(matrix.shape)
+    matrix[:, :] = r.random_sample(matrix.shape)[:, :]
 
 
 def distance_between(arr1: np.ndarray, arr2: np.ndarray, f=np.linalg.norm):

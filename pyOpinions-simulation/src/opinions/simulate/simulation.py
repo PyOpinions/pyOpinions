@@ -44,7 +44,7 @@ class Simulation(Thread):
         step = self.current_step
         forever: bool = self.end_step < 0
         converged: bool = False
-        x = ReferenceManager().positions_matrix
+        x = ReferenceManager().share_positions_matrix_objects
         normalize_matrix(x)
 
         graphs = GraphManager().graphs
@@ -68,7 +68,7 @@ class Simulation(Thread):
             converged = total_abs_dist < DEFAULT_CONVERGENCE_PRECISION  # (oneOverNSquare / step)
 
             normalize_matrix(temp_x)
-            x[:] = temp_x
+            x[:, :] = temp_x[:, :]
 
             updates = complex_dynamics_d.calculate_update(graphs)
             d = complex_dynamics_d.aggregate_dynamics(updates)

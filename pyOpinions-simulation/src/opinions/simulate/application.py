@@ -2,12 +2,15 @@ import itertools
 import sys
 import os
 from random import Random
-from typing import Dict, List
+from typing import Dict, List, Tuple, Iterable, Sequence
+
+import numpy as np
+from networkx.generators import ego
 
 from opinions.graph.graphs import GraphManager
 from opinions.objects.helper import randomize_matrix, normalize_matrix
 from opinions.objects.opinion import OpinionManager
-from opinions.objects.reference import ReferenceManager
+from opinions.objects.reference import ReferenceManager, Reference
 from opinions.simulate.docopt import docopt
 from opinions.simulate.dynamics import JustAggregationComplexDynamics
 from opinions.simulate.simulation import Simulation
@@ -15,6 +18,7 @@ from opinions.simulate.simulation import Simulation
 
 def find_egostics() -> List[int]:  # or List[List[int]]
     # TODO implement
+    return [1, 2, 4]
     pass
 
 
@@ -26,11 +30,23 @@ def egoboost_opinions(egostics: List[int], paranoid_ego_value: float):
         for ref_id in opinions[opinion_id]:
             ego_graph.add_edge(ref_id, ref_id, **{'weight': paranoid_ego_value})
 
-def polarize_opinions(egostics: List[int], random: Random):
+
+def move_to_pole(ref: Reference, target_pole: np.ndarray, nu: float):
+    nu = nu / 2
+    new_coordinates = (ref.anchors * nu) + (target_pole * (1. - nu))
+    # normalize point
+    new_coordinates /= sum(new_coordinates)
+    ref.match(new_coordinates)
+
+
+def polarize_opinions(egostics: List[int], poles: Sequence[np.ndarray], nu: float, random: Random):
     opinion_manager = OpinionManager()
     opinions = opinion_manager.opinions
-    # TODO implement
-    pass
+    for opinion_id in egostics:
+        # this should be applicaple to any number of poles
+        index_of_next_target = random.randint(0, len(poles) - 1)
+        for ref in opinions[opinion_id].references:
+            move_to_pole(ref, poles[index_of_next_target], nu)
 
 
 def prepare_simulation(test_params:Dict = None):
@@ -50,6 +66,7 @@ Options:
   -l, --log=LFILE           Log file (if omitted or -, output to stdout)    [Default: -]
   --numOpinions=tOp         Total number of Opinions                        [Default: 256]
   --intervalsPortion=iP     how much % of the total opinions are intervals  [Default: 0.9]
+  --nu                      polarization coefficient                        [Default: 0.05]
   --show                    Show results (Do NOT do it if you are running on a remote server).
   -h, --help                Print the help screen and exit.
   --version                 Prints the version and exits.
@@ -118,16 +135,16 @@ Options:
     complex_dynamics.init(graph_manager.graphs)
 
     # these two lines MUST be after creating all references
-    positions_matrix_x = reference_manager.positions_matrix
+    positions_matrix_x = reference_manager.share_positions_matrix_objects
     randomize_matrix(positions_matrix_x, random)
-    # normalize_matrix(positions_matrix_x)
+    normalize_matrix(positions_matrix_x)
 
     egostics = find_egostics()
-    # TODO polarize them
-    polarize_opinions(egostics)
+    # polarize them
+    nu = float(args['--nu'])  # TODO may be changed for script backwards compatibility
+    polarize_opinions(egostics, (np.array([1., 0., 0.]), np.array([0.0, 0.5, 0.5])), nu, random)
 
     normalize_matrix(positions_matrix_x)
-    # TODO remove one of the normalizations
 
     simulation = Simulation(2000, complex_dynamics)
     simulation.set_ready(True)

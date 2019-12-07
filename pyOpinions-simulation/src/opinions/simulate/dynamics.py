@@ -217,7 +217,7 @@ class EgoDynamics(OpinionDynamics):
             if g.name != 'ego':
                 continue
             self.cache_all_value.clear()
-            for i, j, ego in g.edges.data('weight', default=g.graph['default_ego']):
+            for i, j, ego in g.edges.data('weight'):  #, default=g.graph['default_ego']):
                 if i != j:
                     raise IndexError(f'i != j ({i}, {j})')
                 self.cache_all_value.append(self.other_params * ego / constants.EPSILON)

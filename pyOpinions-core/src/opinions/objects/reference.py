@@ -32,7 +32,7 @@ class Reference:
             raise ValueError("Number of dimensions is not compatible")
         self.anchors = np.array(new_coordinate, copy=True)
 
-    def match(self, new_coordinates: List[float]):
+    def match(self, new_coordinates: np.ndarray):
         """
         Set the coordinates to passed-in value, without any checks.
         Use this function with caution
@@ -41,7 +41,7 @@ class Reference:
         :return:
         :rtype:
         """
-        self.anchors = np.array(new_coordinates, copy=True)
+        self.anchors[:] = new_coordinates
 
     def add(self, delta: Union[np.ndarray, Reference]) -> Reference:
         d = delta if isinstance(delta, np.ndarray) else delta.anchors
@@ -101,15 +101,18 @@ class ReferenceManager:
         return len(self._references)
 
     @property
-    def positions_matrix(self):
+    def share_positions_matrix_objects(self):
         """
-        Singleton getter.
+        Create the Singleton matrix and share its objects with references.
         Notice that once the matrix is created, it can not be modified (only positions can be updated).
         Call it ONLY AFTER  you have created all the references.
         """
         if self._positions_matrix is None:
             arr = [ref.anchors for ref in self._references]
             self._positions_matrix = np.array(arr, copy=False)
+            # now the other way: share objects between the ndarray and anchors
+            for i, ref in enumerate(self._references):
+                ref.anchors = self._positions_matrix[i]
         return self._positions_matrix
 
 
