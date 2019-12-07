@@ -100,83 +100,84 @@ class IntervalEdgeInteractionDynamics(OpinionDynamics):
         reference_manager = ReferenceManager()
         opinion_manager = OpinionManager()
         one_minus_beta = self.parameter
+
+        # TODO I (may) unify the next castors and polluxes loops into one, using names like my_self & my_brother
+
         # ----------castors --------------------------------
         for i, j in self.castors_graph.edges:
             if isinstance(opinion_manager.opinions[opinion_manager.opinion_id_from_ref_id(i)], PointOpinion):
-                point_ci = reference_manager.get_reference(i)
+                point_pi_id = i
+                point_ci = point_pi = reference_manager.get_reference(i)
                 point_cj = reference_manager.get_reference(j)
-                nominator = one_minus_beta
-                denominator = constants.EPSILON + point_ci.distance_to(point_cj)
-                ret.append((i, j, nominator / denominator))
-                continue
+                v1v2_dot_product = v1_v1_dot_product = 0.
+            else:
+                point_ci = reference_manager.get_reference(i)
+                point_pi_id = list(self.intervals_graph.neighbors(i))[0]  # TODO simplify
+                point_pi = reference_manager.get_reference(point_pi_id)
+                point_cj = reference_manager.get_reference(j)
+                # point_pj_id = list(self.intervals_graph.neighbors(j))[0]  # no need
+                # point_pj = reference_manager.get_reference(point_pj_id)  # no need
 
-            point_ci = reference_manager.get_reference(i)
-            point_pi_id = list(self.intervals_graph.neighbors(i))[0]  # TODO simplify
-            point_pi = reference_manager.get_reference(point_pi_id)
-            point_cj = reference_manager.get_reference(j)
-            # point_pj_id = list(self.intervals_graph.neighbors(j))[0]  # no need
-            # point_pj = reference_manager.get_reference(point_pj_id)  # no need
+                vector_v1 = point_ci.anchors - point_pi.anchors
+                # equals | v1 | ^ 2
+                v1_v1_dot_product: float = vector_v1 @ vector_v1
 
-            vector_v1 = point_ci.anchors - point_pi.anchors
-            # equals | v1 | ^ 2
-            v1_v1_dot_product: float = vector_v1 @ vector_v1
+                # effect of pair (Ci, Pi) on point Cj
+                vector_v2 = point_cj.anchors - point_pi.anchors
+                # the dot product is |v1| * |v2| * cos (theta)
+                v1v2_dot_product: float = vector_v1 @ vector_v2
 
-            # effect of pair (Ci, Pi) on point Cj
-            vector_v2 = point_cj.anchors - point_pi.anchors
-            # the dot product is |v1| * |v2| * cos (theta)
-            v1v2_dot_product: float = vector_v1 @ vector_v2
             if v1v2_dot_product <= 0:
                 # point Cj projection is before or on Pi.
-                alpha = 0
-                one_minus_alpha = 1
+                alpha, one_minus_alpha = 0, 1
                 y_c = point_pi
             elif v1v2_dot_product >= v1_v1_dot_product:
                 # in the line above, notice that v1v1DotProduct actually equals vectorV1LenSqr |v1| * |v1| * cos(0)
 
                 # point Cj projection is on or after Ci.
-                alpha = 1
-                one_minus_alpha = 0
+                alpha, one_minus_alpha = 1, 0
                 y_c = point_ci
             else:
                 alpha = v1v2_dot_product / v1_v1_dot_product
                 one_minus_alpha = 1 - alpha
                 y_c = Reference(-1, coordinates=(point_ci.anchors * alpha + point_pi.anchors * one_minus_alpha))
 
-            # update p -> c
-            nominator = one_minus_beta * one_minus_alpha
             denominator = constants.EPSILON + y_c.distance_to(point_cj)
-            ret.append((point_pi_id, j, nominator / denominator))
+
+            # update p -> c
+            if one_minus_alpha:
+                nominator = one_minus_beta * one_minus_alpha
+                ret.append((point_pi_id, j, nominator / denominator))
 
             # update c -> c
-            nominator = one_minus_beta * alpha
-            # denominator = epsilon + y_c.distance_to(point_cj)  # No need to recalculate
-            ret.append((i, j, nominator / denominator))
+            if alpha:
+                nominator = one_minus_beta * alpha
+                ret.append((i, j, nominator / denominator))
 
         # ----------polluxes --------------------------------
         for i, j in self.polluxes_graph.edges:
             if isinstance(opinion_manager.opinions[opinion_manager.opinion_id_from_ref_id(i)], PointOpinion):
-                point_pi = reference_manager.get_reference(i)
+                point_ci_id = i
+                point_ci = point_pi = reference_manager.get_reference(i)
                 point_pj = reference_manager.get_reference(j)
-                nominator = one_minus_beta
-                denominator = constants.EPSILON + point_pi.distance_to(point_pj)
-                ret.append((i, j, nominator / denominator))
-                continue
+                v1v2_dot_product = v1_v1_dot_product = 0.
+            else:
+                point_pi = reference_manager.get_reference(i)
+                point_ci_id = list(self.intervals_graph.neighbors(i))[0]  # TODO simplify
+                point_ci = reference_manager.get_reference(point_ci_id)
+                point_pj = reference_manager.get_reference(j)
+                # point_cj_id = list(self.intervals_graph.neighbors(j))[0]
+                # point_cj = reference_manager.get_reference(point_cj_id)
 
-            point_pi = reference_manager.get_reference(i)
-            point_ci_id = list(self.intervals_graph.neighbors(i))[0]  # TODO simplify
-            point_ci = reference_manager.get_reference(point_ci_id)
-            point_pj = reference_manager.get_reference(j)
-            # point_cj_id = list(self.intervals_graph.neighbors(j))[0]
-            # point_cj = reference_manager.get_reference(point_cj_id)
+                vector_v1 = point_ci.anchors - point_pi.anchors
+                # equals | v1 | ^ 2
+                v1_v1_dot_product: float = vector_v1 @ vector_v1
 
-            vector_v1 = point_ci.anchors - point_pi.anchors
-            # equals | v1 | ^ 2
-            v1_v1_dot_product: float = vector_v1 @ vector_v1
+                # effect of pair (Ci, Pi) on point Pj
+                vector_v2 = point_pj.anchors - point_pi.anchors
+                # the dot product is |v1| * |v2| * cos (theta)
+                v1v2_dot_product: float = vector_v1 @ vector_v2
 
-            # effect of pair (Ci, Pi) on point Pj
-            vector_v2 = point_pj.anchors - point_pi.anchors
-            # the dot product is |v1| * |v2| * cos (theta)
-            v1v2_dot_product: float = vector_v1 @ vector_v2
             if v1v2_dot_product <= 0:
                 # point Pj projection is before or on Pi.
                 alpha, one_minus_alpha = 1, 0
@@ -192,15 +193,17 @@ class IntervalEdgeInteractionDynamics(OpinionDynamics):
                 alpha = 1 - one_minus_alpha
                 y_p = Reference(-1, coordinates=(point_pi.anchors * alpha + point_ci.anchors * one_minus_alpha))
 
-            # update c -> p
-            nominator = one_minus_beta * one_minus_alpha
             denominator = constants.EPSILON + y_p.distance_to(point_pj)
-            ret.append((point_ci_id, j, nominator / denominator))
+
+            # update c -> p
+            if one_minus_alpha:
+                nominator = one_minus_beta * one_minus_alpha
+                ret.append((point_ci_id, j, nominator / denominator))
 
             # update p -> p
-            nominator = one_minus_beta * alpha
-            # denominator = epsilon + y_c.distance_to(point_cj)  # No need to recalculate
-            ret.append((i, j, nominator / denominator))
+            if alpha:
+                nominator = one_minus_beta * alpha
+                ret.append((i, j, nominator / denominator))
 
         return ret
 
