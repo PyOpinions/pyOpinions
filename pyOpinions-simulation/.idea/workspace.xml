@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7a92b99e-4d1e-4fec-bf7e-05a89671241c" name="Default Changelist" comment="" />
+    <list default="true" id="7a92b99e-4d1e-4fec-bf7e-05a89671241c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/reference.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/reference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyOpinions-graphs/src/opinions/graph/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pyOpinions-graphs/src/opinions/graph/graphs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyOpinions-simulation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyOpinions-simulation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/opinions/simulate/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/opinions/simulate/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/opinions/simulate/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/opinions/simulate/simulation.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +22,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="aalhossary &lt;amr_alhossary@hotmil.com&gt;" />
+        <option value="aalhossary &lt;aalhossary@gmil.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
   <component name="ProjectId" id="1UNEyip1ykkPHhu453GvnVGp3U2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -24,6 +43,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/opinions/simulate" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -205,12 +225,50 @@
       <workItem from="1575557236781" duration="47427000" />
       <workItem from="1575690769211" duration="11603000" />
       <workItem from="1575703142152" duration="8452000" />
-      <workItem from="1575714505189" duration="565000" />
+      <workItem from="1575714505189" duration="15644000" />
     </task>
+    <task id="LOCAL-00001" summary="polarize opinion implemented&#10;&#10;Other modifications as well">
+      <created>1575732812520</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575732812520</updated>
+    </task>
+    <task id="LOCAL-00002" summary="polarize opinion implemented&#10;&#10;Other modifications as well">
+      <created>1575733196324</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575733196324</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node">
+      <created>1575733831227</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575733831227</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="polarize opinion implemented&#10;&#10;Other modifications as well" />
+    <MESSAGE value="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node" />
+    <option name="LAST_COMMIT_MESSAGE" value="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575691621638">
@@ -225,58 +283,74 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="409" y="22" key="#reference/0.0.1366.768@0.0.1366.768" timestamp="1575558204628" />
-    <state width="1230" height="466" key="DebuggerActiveHint" timestamp="1575699816788">
+    <state x="53" y="0" width="1268" height="768" key="CommitChangelistDialog2" timestamp="1575733822652">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1230" height="466" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1575699816788" />
-    <state x="463" y="141" key="FileChooserDialogImpl" timestamp="1575689533418">
+    <state x="53" y="0" width="1268" height="768" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1575733822652" />
+    <state width="1230" height="466" key="DebuggerActiveHint" timestamp="1575731439278">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="463" y="141" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1575689533418" />
+    <state width="1230" height="466" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1575731439278" />
+    <state x="133" y="58" key="DiffContextDialog" timestamp="1575732945616">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="133" y="58" key="DiffContextDialog/0.0.1366.768@0.0.1366.768" timestamp="1575732945616" />
+    <state x="434" y="201" key="FileChooserDialogImpl" timestamp="1575715814088">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="434" y="201" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1575715814088" />
     <state x="528" y="281" key="Github.ShareDialog" timestamp="1575713933922">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="528" y="281" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1575713933922" />
-    <state width="1323" height="192" key="GridCell.Tab.0.bottom" timestamp="1575707629168">
+    <state width="1323" height="238" key="GridCell.Tab.0.bottom" timestamp="1575759837888">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575707629168" />
-    <state width="1323" height="192" key="GridCell.Tab.0.center" timestamp="1575707629167">
+    <state width="1323" height="238" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
+    <state width="1323" height="238" key="GridCell.Tab.0.center" timestamp="1575759837887">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1575707629167" />
-    <state width="1323" height="192" key="GridCell.Tab.0.left" timestamp="1575707629166">
+    <state width="1323" height="238" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1575759837887" />
+    <state width="1323" height="238" key="GridCell.Tab.0.left" timestamp="1575759837886">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1575707629166" />
-    <state width="1323" height="192" key="GridCell.Tab.0.right" timestamp="1575707629167">
+    <state width="1323" height="238" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1575759837886" />
+    <state width="1323" height="238" key="GridCell.Tab.0.right" timestamp="1575759837888">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1575707629167" />
-    <state width="1323" height="238" key="GridCell.Tab.1.bottom" timestamp="1575703108670">
+    <state width="1323" height="238" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
+    <state width="1323" height="238" key="GridCell.Tab.1.bottom" timestamp="1575759837889">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575703108670" />
-    <state width="1323" height="238" key="GridCell.Tab.1.center" timestamp="1575703108669">
+    <state width="1323" height="238" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575759837889" />
+    <state width="1323" height="238" key="GridCell.Tab.1.center" timestamp="1575759837888">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
-    <state width="1323" height="238" key="GridCell.Tab.1.left" timestamp="1575703108669">
+    <state width="1323" height="238" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
+    <state width="1323" height="238" key="GridCell.Tab.1.left" timestamp="1575759837888">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
-    <state width="1323" height="238" key="GridCell.Tab.1.right" timestamp="1575703108669">
+    <state width="1323" height="238" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
+    <state width="1323" height="238" key="GridCell.Tab.1.right" timestamp="1575759837889">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1575703108669" />
+    <state width="1323" height="238" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1575759837889" />
     <state x="192" y="13" key="SettingsEditor" timestamp="1575691767707">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="192" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1575691767707" />
+    <state x="275" y="119" key="Vcs.Push.Dialog.v2" timestamp="1575733838295">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="275" y="119" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1575733838295" />
     <state x="391" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1575714508980">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="391" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1575714508980" />
+    <state x="494" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575724520488">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="494" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1575724520488" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1575688032879">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -296,7 +370,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/opinions/simulate/application.py</url>
-          <line>26</line>
+          <line>30</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -305,7 +379,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$opinion.coverage" NAME="opinion Coverage Results" MODIFIED="1575558230456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$reference.coverage" NAME="reference Coverage Results" MODIFIED="1575558204862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
-    <SUITE FILE_PATH="coverage/pyOpinions_simulation$application.coverage" NAME="application Coverage Results" MODIFIED="1575707629126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$application.coverage" NAME="application Coverage Results" MODIFIED="1575734807542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$simulation.coverage" NAME="grand simulation Coverage Results" MODIFIED="1575691811747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$dynamics.coverage" NAME="dynamics Coverage Results" MODIFIED="1575558679209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
   </component>

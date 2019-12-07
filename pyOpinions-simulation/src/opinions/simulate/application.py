@@ -134,8 +134,8 @@ Options:
     complex_dynamics.give_me_dynamics('FCoNCaP', args)
     complex_dynamics.init(graph_manager.graphs)
 
-    # these two lines MUST be after creating all references
-    positions_matrix_x = reference_manager.share_positions_matrix_objects
+    # these three lines MUST be after creating all references
+    positions_matrix_x = reference_manager.consolidate_positions_matrix_and_share_its_objects()
     randomize_matrix(positions_matrix_x, random)
     normalize_matrix(positions_matrix_x)
 

@@ -28,7 +28,7 @@ class GraphManager:
     def give_me_graph(self, graph_name: str, model_name: str, num_nodes: int, graph_params: dict, seed) -> Graph:
         if graph_name in ('castors', 'polluxes'):
             if model_name == 'DSFG':
-                g = nx.OrderedDiGraph()  # TODO change it back some day
+                g = nx.OrderedDiGraph()
                 g.name = graph_name
                 alpha = graph_params['alpha']
                 gamma = graph_params['gamma']

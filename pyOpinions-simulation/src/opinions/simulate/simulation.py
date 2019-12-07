@@ -44,7 +44,7 @@ class Simulation(Thread):
         step = self.current_step
         forever: bool = self.end_step < 0
         converged: bool = False
-        x = ReferenceManager().share_positions_matrix_objects
+        x = ReferenceManager().consolidate_positions_matrix_and_share_its_objects()
         normalize_matrix(x)
 
         graphs = GraphManager().graphs

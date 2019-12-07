@@ -9,5 +9,6 @@
     <orderEntry type="module" module-name="pyOpinions-core" />
     <orderEntry type="module" module-name="pyOpinions-graphs" />
     <orderEntry type="module" module-name="pyOpinions-io" />
+    <orderEntry type="module" module-name="pyOpinions" />
   </component>
 </module>

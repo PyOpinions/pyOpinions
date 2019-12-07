@@ -100,8 +100,7 @@ class ReferenceManager:
     def num_references(self):
         return len(self._references)
 
-    @property
-    def share_positions_matrix_objects(self):
+    def consolidate_positions_matrix_and_share_its_objects(self) -> np.ndarray:
         """
         Create the Singleton matrix and share its objects with references.
         Notice that once the matrix is created, it can not be modified (only positions can be updated).
