@@ -85,18 +85,20 @@ def my_scale_free_graph(n, alpha=0.41, beta=0.54, gamma=0.05, delta_in=0.2,
         G.add_node(0)
 
     number_of_edges = G.number_of_edges()
-    while len(G) < n:
+    while len(G) <= n:
         psum_in = number_of_edges + delta_in * len(G)
         psum_out = number_of_edges + delta_out * len(G)
         r = seed.random()
         # random choice in alpha,beta,gamma ranges
-        if r < alpha:
+        if r <= alpha:
             # alpha
+            if len(G) == n:
+                break
             # add new node v
             v = len(G)
             # choose w according to in-degree and delta_in
             w = _choose_node(G, G.in_degree(), delta_in, psum_in)
-        elif r < alpha + beta:
+        elif r <= alpha + beta:
             # beta
             # choose v according to out-degree and delta_out
             v = _choose_node(G, G.out_degree(), delta_out, psum_out)
@@ -104,6 +106,8 @@ def my_scale_free_graph(n, alpha=0.41, beta=0.54, gamma=0.05, delta_in=0.2,
             w = _choose_node(G, G.in_degree(), delta_in, psum_in)
         else:
             # gamma
+            if len(G) == n:
+                break
             # choose v according to out-degree and delta_out
             v = _choose_node(G, G.out_degree(), delta_out, psum_out)
             # add new node w
