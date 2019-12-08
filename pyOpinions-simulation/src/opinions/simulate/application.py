@@ -113,13 +113,14 @@ Options:
     if not os.path.exists(log_arg):
         os.makedirs(out_folder_arg, exist_ok=True)
 
-    cc_file_path = os.path.join(out_folder_arg, 'gcc-%s.log' % (id,))
+    run_id = args['--id']
+    cc_file_path = os.path.join(out_folder_arg, 'gcc-%s.log' % (run_id,))
     cc_file = open(cc_file_path, 'w')
-    pp_file_path = os.path.join(out_folder_arg, 'gpp-%s.log' % (id,))
+    pp_file_path = os.path.join(out_folder_arg, 'gpp-%s.log' % (run_id,))
     pp_file = open(pp_file_path, 'w')
-    dcp_file_path = os.path.join(out_folder_arg, 'dcp-%s.log' % (id,))
+    dcp_file_path = os.path.join(out_folder_arg, 'dcp-%s.log' % (run_id,))
     dcp_file = open(dcp_file_path, 'w')
-    x_file_path = os.path.join(out_folder_arg, 'x-%s.log' % (id,))
+    x_file_path = os.path.join(out_folder_arg, 'x-%s.log' % (run_id,))
     x_file = open(x_file_path, 'w')
     # d_file  # Do you really want it?
 
@@ -200,6 +201,7 @@ if __name__ == '__main__':
         # 'ego': 4,
         # 'beta': 0.20,
         # 'epsilon': 0.1,
+        '--id': 'test',
 
         # '<alpha>': 0.0,
         # '<gamma>': 0.129,
