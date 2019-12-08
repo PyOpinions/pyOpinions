@@ -94,4 +94,4 @@ class Simulation(Thread):
         print(np.array2string(x.transpose(), max_line_width=9999999999, threshold=30000000, precision=6,
                               floatmode='fixed', prefix=''), file=file)
         print(file=file)
-        # TODO print D
+        # TODO print D (if you really want)

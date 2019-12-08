@@ -30,10 +30,10 @@ class GraphManager:
             if model_name == 'DSFG':
                 g = nx.OrderedDiGraph()
                 g.name = graph_name
-                alpha = graph_params['alpha']
-                gamma = graph_params['gamma']
-                delta_in = graph_params['deltaIn']
-                delta_out = graph_params['deltaOut']
+                alpha = graph_params['<alpha>']
+                gamma = graph_params['<gamma>']
+                delta_in = graph_params['<deltaIn>']
+                delta_out = graph_params['<deltaOut>']
                 my_scale_free_graph(num_nodes, alpha=alpha, beta=(1 - alpha - gamma), gamma=gamma,
                                            delta_in=delta_in, delta_out=delta_out, create_using=g, seed=seed)
             else:

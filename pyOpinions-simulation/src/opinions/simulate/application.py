@@ -55,29 +55,44 @@ def prepare_simulation(test_params:Dict = None):
     This is one of 2 methods to initialize a simulation.
     """
 
-    doc = """Simulate Opinion dynamics (Documentations not yet full or accurate)
+    doc = """Simulate Opinion dynamics (Documentations [almost] complete)
 
 Usage:
   application.py [options]
+  application.py [options] [--topology <topology> <alpha> <gamma> <deltaIn> <deltaOut>]
 
 Options:
   -s, --seed=SEED           Randomization seed (if omitted, use system pseudorandom generator)
   -d, --dimensions=DIMS     Number of dimensions of opinions                [Default: 3]
   -l, --log=LFILE           Log file (if omitted or -, output to stdout)    [Default: -]
+  --inFolder=IFOLDER        I don't know. Just in case                      [Default: ./]
+  --outFolder=OFOLDER       Where all output files are written              [Default: ./]
   --numOpinions=tOp         Total number of Opinions                        [Default: 256]
   --intervalsPortion=iP     how much % of the total opinions are intervals  [Default: 0.9]
-  --nu                      polarization coefficient                        [Default: 0.05]
-  --show                    Show results (Do NOT do it if you are running on a remote server).
+  --nu=NU                   polarization coefficient (1. means half range)  [Default: 0.05]
+  --ego=EGO                 Default ego value for all references            [Default: 4.0]
+  --beta=BETA               Default interval coherence coefficient value    [Default: 0.1]
+  --epsilon=EPSILON         Default interaction distance bias value         [Default: 0.1]
+  --egoRatio=EGORATIO       portion (of 1.0) of opinions who are egocentric [Default: 0.0]
+  --manageStubborn          how to manage the stupporn opinions. values are none, 
+                            polarizeSingle(polarizeRef), and polarizeCouple(polarizeOpinion)
+                                                                            [Default: polarizeCouple]
+  --model=MODEL             The opinion dynamics model                      [Default: FCoNCaP]
+  --topology=TOPOLOGY       THe interaction graph topology                  [Default: DSFG]
+  --id=ID                   The simulation ID, including all necessary parameters
+  --showGUI                 Show results (Do NOT do it if you are running on a remote server).
+  --dt=DT                   Visual step delay in seconds (not yet used)     [Default: 0.0]
   -h, --help                Print the help screen and exit.
   --version                 Prints the version and exits.
 """
 
 # """
+#     numCouples --> numOpinions
 #   -i, --in-folder=IFOLDER   input folder where all means/variances are.     [Default: ./]
 #   -o, --out-folder=OFOLDER  Output folder where all scenarios are written   [Default: ./out]
 # """
 
-    args = docopt(doc, version='0.1.0')
+    args = docopt(doc, version='3.0.0')
 
     log_arg = args['--log']
     if log_arg == '-':
@@ -101,26 +116,30 @@ Options:
     graph_manager = GraphManager()
     random = Random() if args['--seed'] is None else Random(int(args['--seed']))
     args['random'] = random
+    args['ego'] = float(args['--ego'])
+    args['beta'] = float(args['--beta'])
 
     total_num_opinions = int(args['--numOpinions'])
     interval_portion = float(args['--intervalsPortion'])
     num_interval_opinions = int(total_num_opinions * interval_portion)
     num_point_opinions = total_num_opinions - num_interval_opinions
 
-    interval_opinions = opinion_manager.give_me_num_opinions(num_interval_opinions, 'interval', int(args['--dimensions']))
-    point_opinions = opinion_manager.give_me_num_opinions(num_point_opinions, 'point', int(args['--dimensions']))
+    num_dimensions = int(args['--dimensions'])
+    interval_opinions = opinion_manager.give_me_num_opinions(num_interval_opinions, 'interval', num_dimensions)
+    point_opinions = opinion_manager.give_me_num_opinions(num_point_opinions, 'point', num_dimensions)
     all_opinions = interval_opinions + point_opinions
 
     intervals_graph = graph_manager.give_me_graph('intervals', '', num_interval_opinions, args, random)
     mapping = [ref.absolute_id for ref in itertools.chain(*[opinion.get_references for opinion in interval_opinions])]
     graph_manager.translate_graph(intervals_graph, mapping)
 
-    castors_points_graph = graph_manager.give_me_graph('castors', 'DSFG', total_num_opinions, args, random)
+    topology = args['--topology']
+    castors_points_graph = graph_manager.give_me_graph('castors', topology, total_num_opinions, args, random)
     mapping = [ref.absolute_id for ref in itertools.chain(*[opinion.get_references for opinion in all_opinions])
                if ref.name in ('castor', 'point')]
     graph_manager.translate_graph(castors_points_graph, mapping)
 
-    polluxes_points_graph = graph_manager.give_me_graph('polluxes', 'DSFG', total_num_opinions, args, random)
+    polluxes_points_graph = graph_manager.give_me_graph('polluxes', topology, total_num_opinions, args, random)
     mapping = [ref.absolute_id for ref in itertools.chain(*[opinion.get_references for opinion in all_opinions])
                if ref.name in ('pollux', 'point')]
     graph_manager.translate_graph(polluxes_points_graph, mapping)
@@ -131,7 +150,7 @@ Options:
 
     num_references = reference_manager.num_references()
     complex_dynamics = JustAggregationComplexDynamics(num_references)
-    complex_dynamics.give_me_dynamics('FCoNCaP', args)
+    complex_dynamics.give_me_dynamics(args['--model'], args)
     complex_dynamics.init(graph_manager.graphs)
 
     # these three lines MUST be after creating all references
@@ -153,12 +172,18 @@ Options:
 
 if __name__ == '__main__':
     test_params = {
-        'ego': 4,
-        'beta': 0.20,
-        'epsilon': 0.1,
-        'alpha': 0.3,
-        'gamma': 0.3,
-        'deltaIn': 0.2,
-        'deltaOut': 0.5
+        # 'ego': 4,
+        # 'beta': 0.20,
+        # 'epsilon': 0.1,
+
+        # '<alpha>': 0.0,
+        # '<gamma>': 0.129,
+        # '<deltaIn>': 10.82,
+        # '<deltaOut>': 1.55
+
+        '<alpha>': 0.014,
+        '<gamma>': 0.1259,
+        '<deltaIn>': 10.0,
+        '<deltaOut>': 1.31
     }
     prepare_simulation(test_params)

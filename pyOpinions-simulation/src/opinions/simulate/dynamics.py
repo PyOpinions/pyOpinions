@@ -261,7 +261,7 @@ class ComplexDynamics (OpinionDynamics):
             dynamics = [EgoDynamics(1), EdgeEdgeInteractionDynamics(1, beta_function)]
 
         elif model_name == 'CoNCaP-phi':
-            phi: float = params['phi']
+            phi: float = float(params['phi'])
 
             dynamics = [EgoDynamics(1 - phi), IntervalCoherenceDynamics(phi, phi_function),
                         EdgeEdgeInteractionDynamics(1 - phi, beta_function)]
