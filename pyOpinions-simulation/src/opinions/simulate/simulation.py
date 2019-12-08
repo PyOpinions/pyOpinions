@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from threading import Thread
+from typing import Dict
 
 from opinions.graph.graphs import GraphManager
 from opinions.objects.constants import *
@@ -16,11 +17,13 @@ class Simulation(Thread):
     verbose = False
     complex_dynamics_d: ComplexDynamics = None
 
-    def __init__(self, end_step: int, complex_dynamics: ComplexDynamics):
+    def __init__(self, end_step: int, complex_dynamics: ComplexDynamics, args: Dict):
         super().__init__()
         # self.graphManager = GraphManager()
         self.end_step = end_step
         self.complex_dynamics_d = complex_dynamics
+        self.args = args
+        self.verbose = args['--verbose']
 
     def load_simulation(self, path: str):
         """
@@ -38,7 +41,8 @@ class Simulation(Thread):
         if not self.ready:
             raise RuntimeError('Simulation NOT ready yet!. call set_ready(True) or load_simulation() first')
 
-        xFile = open('x-temp.log', 'w')  #TODO proper file(s) handling
+        xFile = self.args['xFile']
+        verbose = self.verbose
 
         end_step = self.end_step
         step = self.current_step
@@ -53,8 +57,8 @@ class Simulation(Thread):
         d = complex_dynamics_d.aggregate_dynamics(updates)
         # normalize_matrix(d)  # Already called inside aggregate_dynamics(updates)
 
-        if self.verbose:
-            self.print_x_and_d(step, x, d)
+        if verbose:
+            self.print_x_and_d(step, x, d)  # i.e. to the stdout
 
         while forever or step < end_step:
             # now I have transformation (effects) matrix and x (opinions) matrix
@@ -77,7 +81,7 @@ class Simulation(Thread):
             # ==============simulation step proper ends here ================
             print('Step = %d, Total Diff = %8.5E, Converged = %r' % (step, total_abs_dist, converged))
 
-            if self.verbose:
+            if verbose:
                 self.print_x_and_d(step, x, d)
             self.print_x_and_d(step, x, d, file=xFile)
 

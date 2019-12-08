@@ -84,6 +84,7 @@ Options:
   --dt=DT                   Visual step delay in seconds (not yet used)     [Default: 0.0]
   -h, --help                Print the help screen and exit.
   --version                 Prints the version and exits.
+  --verbose                 Prints a lot of information details.
 """
 
 # """
@@ -94,6 +95,10 @@ Options:
 
     args = docopt(doc, version='3.0.0')
 
+    # Testing purpose
+    if test_params is not None:
+        args.update(test_params)
+
     log_arg = args['--log']
     if log_arg == '-':
         log = sys.stdout
@@ -103,10 +108,25 @@ Options:
             if dirname != '':
                 os.makedirs(dirname, exist_ok=True)
         log = open(log_arg, 'w')
-    args['log'] = log
 
-    if test_params is not None:
-        args.update(test_params)
+    out_folder_arg = args['--outFolder']
+    if not os.path.exists(log_arg):
+        os.makedirs(out_folder_arg, exist_ok=True)
+
+    cc_file_path = os.path.join(out_folder_arg, 'gcc-%s.log' % (id,))
+    cc_file = open(cc_file_path, 'w')
+    pp_file_path = os.path.join(out_folder_arg, 'gpp-%s.log' % (id,))
+    pp_file = open(pp_file_path, 'w')
+    dcp_file_path = os.path.join(out_folder_arg, 'dcp-%s.log' % (id,))
+    dcp_file = open(dcp_file_path, 'w')
+    x_file_path = os.path.join(out_folder_arg, 'x-%s.log' % (id,))
+    x_file = open(x_file_path, 'w')
+    # d_file  # Do you really want it?
+
+    args['log'] = log
+    args['xFile'] = x_file
+    # args['dFile'] = d_file  # Really need it?
+
     # #################################
     # Preparing simulation starts here
     # #################################
@@ -148,6 +168,11 @@ Options:
     mapping = [ref.absolute_id for ref in ReferenceManager().references]
     graph_manager.translate_graph(ego_graph, mapping)
 
+
+    # TODO write graphs and ego values to their respective files here.
+    #  Ops: one new challenge: How to indicate different references and their class types?!
+    #  I am running out of mind and time and have to stop here.
+
     num_references = reference_manager.num_references()
     complex_dynamics = JustAggregationComplexDynamics(num_references)
     complex_dynamics.give_me_dynamics(args['--model'], args)
@@ -165,7 +190,7 @@ Options:
 
     normalize_matrix(positions_matrix_x)
 
-    simulation = Simulation(2000, complex_dynamics)
+    simulation = Simulation(2000, complex_dynamics, args)
     simulation.set_ready(True)
     simulation.start()
 
