@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a92b99e-4d1e-4fec-bf7e-05a89671241c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/reference.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/reference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyOpinions-io/src/opinions/io/opinionsIO.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Amr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/opinion.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects/opinion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pyOpinions-graphs/src/opinions/graph/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../pyOpinions-graphs/src/opinions/graph/graphs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pyOpinions-simulation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyOpinions-simulation.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/opinions/simulate/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/opinions/simulate/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/opinions/simulate/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/opinions/simulate/simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/opinions/simulate/dynamics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/opinions/simulate/dynamics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Amr ALHOSSARY &lt;amr_alhossary@hotmail.com&gt;" />
         <option value="aalhossary &lt;amr_alhossary@hotmil.com&gt;" />
         <option value="aalhossary &lt;aalhossary@gmil.com&gt;" />
       </list>
@@ -83,7 +84,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/opinions/simulate/application.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="--topology DSFG 0.0140 0.1259 10.0 1.31 --beta 0.20 --verbose --selectFrom point,interval" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -225,7 +226,9 @@
       <workItem from="1575557236781" duration="47427000" />
       <workItem from="1575690769211" duration="11603000" />
       <workItem from="1575703142152" duration="8452000" />
-      <workItem from="1575714505189" duration="15644000" />
+      <workItem from="1575714505189" duration="31184000" />
+      <workItem from="1576768248734" duration="39765000" />
+      <workItem from="1577055758002" duration="14170000" />
     </task>
     <task id="LOCAL-00001" summary="polarize opinion implemented&#10;&#10;Other modifications as well">
       <created>1575732812520</created>
@@ -248,7 +251,49 @@
       <option name="project" value="LOCAL" />
       <updated>1575733831227</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node">
+      <created>1575760181132</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575760181132</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Better way of dealing with degenerate case of one edge falls into one point">
+      <created>1575763141626</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1575763141626</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Almost complete CLI parameters&#10;&#10;It's complete for the current task">
+      <created>1575774105595</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1575774105595</updated>
+    </task>
+    <task id="LOCAL-00007" summary="While calling for flight boarding&#10;&#10;I didn't test this commit">
+      <created>1575803081351</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1575803081351</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node">
+      <created>1575804010740</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1575804010740</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fix bug">
+      <created>1575804198428</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1575804198428</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,22 +304,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="polarize opinion implemented&#10;&#10;Other modifications as well" />
+    <MESSAGE value="Better way of dealing with degenerate case of one edge falls into one point" />
+    <MESSAGE value="Almost complete CLI parameters&#10;&#10;It's complete for the current task" />
+    <MESSAGE value="While calling for flight boarding&#10;&#10;I didn't test this commit" />
     <MESSAGE value="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node" />
-    <option name="LAST_COMMIT_MESSAGE" value="Relax max number of edges&#10;&#10;edges continue after the target number of nodes is reached, as long as adding new edge will not lead to adding new node" />
+    <MESSAGE value="Fix bug" />
+    <MESSAGE value="Implemented the new graph and opinion generation scenario&#10;&#10;Also, some renaming, and dictionary.&#10;Separated files in OpinionsIO class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the new graph and opinion generation scenario&#10;&#10;Also, some renaming, and dictionary.&#10;Separated files in OpinionsIO class." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575691621638">
+    <state x="124" y="36" width="1157" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577050544109">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="137" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1575691621638" />
+    <state x="124" y="36" width="1157" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1577050544109" />
+    <state x="363" y="122" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1577054257749">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="363" y="122" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.768@0.0.1366.768" timestamp="1577054257749" />
     <state x="413" y="133" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575691521368">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -283,18 +340,18 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="409" y="22" key="#reference/0.0.1366.768@0.0.1366.768" timestamp="1575558204628" />
-    <state x="53" y="0" width="1268" height="768" key="CommitChangelistDialog2" timestamp="1575733822652">
+    <state x="50" y="0" width="1268" height="768" key="CommitChangelistDialog2" timestamp="1577084874903">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="53" y="0" width="1268" height="768" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1575733822652" />
-    <state width="1230" height="466" key="DebuggerActiveHint" timestamp="1575731439278">
+    <state x="50" y="0" width="1268" height="768" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1577084874903" />
+    <state width="1230" height="466" key="DebuggerActiveHint" timestamp="1577083211700">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1230" height="466" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1575731439278" />
-    <state x="133" y="58" key="DiffContextDialog" timestamp="1575732945616">
+    <state width="1230" height="466" key="DebuggerActiveHint/0.0.1366.768@0.0.1366.768" timestamp="1577083211700" />
+    <state x="133" y="58" width="1092" height="644" key="DiffContextDialog" timestamp="1575804305542">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="133" y="58" key="DiffContextDialog/0.0.1366.768@0.0.1366.768" timestamp="1575732945616" />
+    <state x="133" y="58" width="1092" height="644" key="DiffContextDialog/0.0.1366.768@0.0.1366.768" timestamp="1575804305542" />
     <state x="434" y="201" key="FileChooserDialogImpl" timestamp="1575715814088">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -303,62 +360,70 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="528" y="281" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1575713933922" />
-    <state width="1323" height="238" key="GridCell.Tab.0.bottom" timestamp="1575759837888">
+    <state width="1323" height="325" key="GridCell.Tab.0.bottom" timestamp="1577083700289">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
-    <state width="1323" height="238" key="GridCell.Tab.0.center" timestamp="1575759837887">
+    <state width="1323" height="325" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1577083700289" />
+    <state width="1323" height="325" key="GridCell.Tab.0.center" timestamp="1577083700288">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1575759837887" />
-    <state width="1323" height="238" key="GridCell.Tab.0.left" timestamp="1575759837886">
+    <state width="1323" height="325" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1577083700288" />
+    <state width="1323" height="325" key="GridCell.Tab.0.left" timestamp="1577083700288">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1575759837886" />
-    <state width="1323" height="238" key="GridCell.Tab.0.right" timestamp="1575759837888">
+    <state width="1323" height="325" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1577083700288" />
+    <state width="1323" height="325" key="GridCell.Tab.0.right" timestamp="1577083700289">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
-    <state width="1323" height="238" key="GridCell.Tab.1.bottom" timestamp="1575759837889">
+    <state width="1323" height="325" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1577083700289" />
+    <state width="1323" height="159" key="GridCell.Tab.1.bottom" timestamp="1577083665094">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1575759837889" />
-    <state width="1323" height="238" key="GridCell.Tab.1.center" timestamp="1575759837888">
+    <state width="1323" height="159" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1577083665094" />
+    <state width="1323" height="159" key="GridCell.Tab.1.center" timestamp="1577083665093">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
-    <state width="1323" height="238" key="GridCell.Tab.1.left" timestamp="1575759837888">
+    <state width="1323" height="159" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1577083665093" />
+    <state width="1323" height="159" key="GridCell.Tab.1.left" timestamp="1577083665093">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1575759837888" />
-    <state width="1323" height="238" key="GridCell.Tab.1.right" timestamp="1575759837889">
+    <state width="1323" height="159" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1577083665093" />
+    <state width="1323" height="159" key="GridCell.Tab.1.right" timestamp="1577083665094">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="238" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1575759837889" />
+    <state width="1323" height="159" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1577083665094" />
     <state x="192" y="13" key="SettingsEditor" timestamp="1575691767707">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="192" y="13" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1575691767707" />
-    <state x="275" y="119" key="Vcs.Push.Dialog.v2" timestamp="1575733838295">
+    <state x="275" y="119" key="Vcs.Push.Dialog.v2" timestamp="1575804207784">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="119" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1575733838295" />
-    <state x="391" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1575714508980">
+    <state x="275" y="119" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1575804207784" />
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1577055761365">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="391" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1575714508980" />
+    <state x="391" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1577055761365" />
     <state x="494" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575724520488">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="494" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1575724520488" />
+    <state x="390" y="145" width="710" height="606" key="find.popup" timestamp="1577071460199">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="390" y="145" width="710" height="606" key="find.popup/0.0.1366.768@0.0.1366.768" timestamp="1577071460199" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1575688032879">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="550" height="500" key="javadoc.popup.new" timestamp="1575680218422">
+    <state width="550" height="500" key="javadoc.popup.new" timestamp="1577078348758">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="550" height="500" key="javadoc.popup.new/0.0.1366.768@0.0.1366.768" timestamp="1575680218422" />
+    <state width="550" height="500" key="javadoc.popup.new/0.0.1366.768@0.0.1366.768" timestamp="1577078348758" />
     <state width="600" height="424" key="javadoc.popup/0.0.1366.768@0.0.1366.768" timestamp="1575688032879" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577072632460">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1577072632460" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -370,8 +435,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/opinions/simulate/application.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="2" />
+          <line>45</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -379,7 +444,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$opinion.coverage" NAME="opinion Coverage Results" MODIFIED="1575558230456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$reference.coverage" NAME="reference Coverage Results" MODIFIED="1575558204862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pyOpinions-core/src/opinions/objects" />
-    <SUITE FILE_PATH="coverage/pyOpinions_simulation$application.coverage" NAME="application Coverage Results" MODIFIED="1575734807542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
+    <SUITE FILE_PATH="coverage/pyOpinions_simulation$application.coverage" NAME="application Coverage Results" MODIFIED="1577083700253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$simulation.coverage" NAME="grand simulation Coverage Results" MODIFIED="1575691811747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../" />
     <SUITE FILE_PATH="coverage/pyOpinions_simulation$dynamics.coverage" NAME="dynamics Coverage Results" MODIFIED="1575558679209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/opinions/simulate" />
   </component>

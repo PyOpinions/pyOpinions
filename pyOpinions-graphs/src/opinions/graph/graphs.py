@@ -26,7 +26,7 @@ class GraphManager:
         return self._graphs
 
     def give_me_graph(self, graph_name: str, model_name: str, num_nodes: int, graph_params: dict, seed) -> Graph:
-        if graph_name in ('castors', 'polluxes'):
+        if graph_name in ('castors', 'polluces'):
             if model_name == 'DSFG':
                 g = nx.OrderedDiGraph()
                 g.name = graph_name

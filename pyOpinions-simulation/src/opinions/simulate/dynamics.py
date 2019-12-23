@@ -27,29 +27,25 @@ class IntervalCoherenceDynamics(OpinionDynamics):
         self.function = function
 
     def init(self, graphs: Dict[str, Graph]):
-        for g in graphs.values():
-            if g.name != 'intervals':
-                continue
-            # self.epsilon = g.graph['epsilon']
-            for i, j in g.edges():
-                if OpinionManager.opinion_id_from_ref_id(i) != OpinionManager.opinion_id_from_ref_id(j):
-                    raise IndexError('opinion of i != that of j (%d in %d, %d in %d)'
-                                     % (i, OpinionManager.opinion_id_from_ref_id(i), j,
-                                        OpinionManager.opinion_id_from_ref_id(i)))
+        g = graphs['intervals']
+        # self.epsilon = g.graph['epsilon']
+        for i, j in g.edges():
+            if OpinionManager.opinion_id_from_ref_id(i) != OpinionManager.opinion_id_from_ref_id(j):
+                raise IndexError('opinion of i != that of j (%d in %d, %d in %d)'
+                                 % (i, OpinionManager.opinion_id_from_ref_id(i), j,
+                                    OpinionManager.opinion_id_from_ref_id(i)))
 
     def calculate_update(self, graphs: Dict[str, Graph]) -> List[Tuple[int, int, Any]]:
         ret = []
         parameter = self.parameter
         function = self.function
-        for g in graphs.values():
-            if g.name != 'intervals':
-                continue
-            for i, j in g.edges():
-                # Calculate only once per edge
-                if i < j:
-                    beta_effect = function(i, j, parameter)
-                    ret.append((i, j, beta_effect))
-                    ret.append((j, i, beta_effect))
+        g = graphs['intervals']
+        for i, j in g.edges():
+            # Calculate only once per edge. Notice also that THIS graph is undirected
+            if i < j:
+                beta_effect = function(i, j, parameter)
+                ret.append((i, j, beta_effect))
+                ret.append((j, i, beta_effect))
         return ret
 
 
@@ -62,7 +58,7 @@ class EdgeEdgeInteractionDynamics(OpinionDynamics):
 
     def init(self, graphs: Dict[str, Graph]):
         for g in graphs.values():
-            if g.name not in ('castors', 'polluxes'):
+            if g.name not in ('castors', 'polluces'):
                 continue
             # self.epsilon = g.graph['epsilon']
             for i, j in g.edges():
@@ -73,7 +69,7 @@ class EdgeEdgeInteractionDynamics(OpinionDynamics):
         ret = []
         function = self.function
         for g in graphs.values():
-            if g.name not in ('castors', 'polluxes'):
+            if g.name not in ('castors', 'polluces'):
                 continue
             for i, j in g.edges():
                 ret.append((i, j, function(i, j)))
@@ -83,7 +79,7 @@ class EdgeEdgeInteractionDynamics(OpinionDynamics):
 class IntervalEdgeInteractionDynamics(OpinionDynamics):
     __doc__ = """FCoNCaP"""
     castors_graph = None
-    polluxes_graph = None
+    polluces_graph = None
     intervals_graph = None
 
     def __init__(self, parameter: float, function):
@@ -92,7 +88,7 @@ class IntervalEdgeInteractionDynamics(OpinionDynamics):
 
     def init(self, graphs: Dict[str, Graph]):
         self.castors_graph = graphs['castors']
-        self.polluxes_graph = graphs['polluxes']
+        self.polluces_graph = graphs['polluces']
         self.intervals_graph = graphs['intervals']
 
     def calculate_update(self, graphs: Dict[str, Graph]) -> List[Tuple[int, int, Any]]:
@@ -101,7 +97,7 @@ class IntervalEdgeInteractionDynamics(OpinionDynamics):
         opinion_manager = OpinionManager()
         one_minus_beta = self.parameter
 
-        # TODO I (may) unify the next castors and polluxes loops into one, using names like my_self & my_brother
+        # TODO I (may) unify the next castors and polluces loops into one, using names like my_self & my_brother
 
         # ----------castors --------------------------------
         for i, j in self.castors_graph.edges:
@@ -154,8 +150,8 @@ class IntervalEdgeInteractionDynamics(OpinionDynamics):
                 nominator = one_minus_beta * alpha
                 ret.append((i, j, nominator / denominator))
 
-        # ----------polluxes --------------------------------
-        for i, j in self.polluxes_graph.edges:
+        # ----------polluces --------------------------------
+        for i, j in self.polluces_graph.edges:
             if isinstance(opinion_manager.opinions[opinion_manager.opinion_id_from_ref_id(i)], PointOpinion):
                 point_ci_id = i
                 point_ci = point_pi = reference_manager.get_reference(i)
@@ -216,24 +212,20 @@ class EgoDynamics(OpinionDynamics):
         self.cache_all_value = list()
 
     def init(self, graphs: Dict[str, Graph]):
-        for g in graphs.values():
-            if g.name != 'ego':
-                continue
-            self.cache_all_value.clear()
-            for i, j, ego in g.edges.data('weight'):  #, default=g.graph['default_ego']):
-                if i != j:
-                    raise IndexError(f'i != j ({i}, {j})')
-                self.cache_all_value.append(self.other_params * ego / constants.EPSILON)
+        g = graphs['ego']
+        self.cache_all_value.clear()
+        for i, j, ego in g.edges.data('weight'):  #, default=g.graph['default_ego']):
+            if i != j:
+                raise IndexError(f'i != j ({i}, {j})')
+            self.cache_all_value.append(self.other_params * ego / constants.EPSILON)
 
     def calculate_update(self, graphs: Dict[str, Graph]) -> List[Tuple[int, int, Any]]:
         # default_ego = self.other_params
         ret = []
-        for g in graphs.values():
-            if g.name != 'ego':
-                continue
-            cache_all_value = self.cache_all_value
-            for i, j in g.edges:
-                ret.append((i, j, cache_all_value[i]))
+        g = graphs['ego']
+        cache_all_value = self.cache_all_value
+        for i, j in g.edges:
+            ret.append((i, j, cache_all_value[i]))
         return ret
 
 

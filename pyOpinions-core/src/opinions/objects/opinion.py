@@ -65,10 +65,10 @@ class OpinionManager:
             cls._instance.opinions = []
         return cls._instance
 
-    def give_me_num_opinions(self, num_opinions: int, op_type: str, num_dimensions: int) -> List[Opinion]:
+    def give_me_num_opinions(self, num_opinions: int, opinion_class_name: str, num_dimensions: int) -> List[Opinion]:
         ret: List[Opinion] = []
         for i in range(num_opinions):
-            ret.append(self.give_me_an_opinion(op_type, num_dimensions))
+            ret.append(self.give_me_an_opinion(opinion_class_name, num_dimensions))
         return ret
 
     def give_me_an_opinion(self, op_type: str, num_dimensions: int):
