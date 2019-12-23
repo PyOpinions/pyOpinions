@@ -234,11 +234,8 @@ Options:
     egoboost_opinions(list(egoboosting_candidates), args['beta'], 5)  # TODO parameterize this "5" later
 
     opinions_io = OpinionsIO()
-    files = opinions_io.create_output_files(args)
-    args.update(**files)
-    # TODO write graphs and ego values to their respective files here.
-    #  Ops: one new challenge: How to indicate different references and their class types?!
-    #  I am running out of mind and time and have to stop here.
+    files = opinions_io.open_output_files(args)
+    # args.update(**files)
 
     num_references = reference_manager.num_references()
     complex_dynamics = JustAggregationComplexDynamics(num_references)
@@ -257,9 +254,16 @@ Options:
 
     normalize_matrix(positions_matrix_x)
 
+    # write graphs and ego values to their respective files here.
+    opinions_io.simulation_starting((graph_manager, opinion_manager))
+    # TODO Check that we indicate different references and their class types well
+
     simulation = Simulation(2000, complex_dynamics, args)
+    simulation.add_listener(opinions_io)
     simulation.set_ready(True)
     simulation.start()
+    # Should be able to wait for (join) the simulation thread and call opinions_io.simulation_ended() here as well
+    # with no harm
 
 
 if __name__ == '__main__':
@@ -279,4 +283,5 @@ if __name__ == '__main__':
         '<deltaIn>': 10.0,
         '<deltaOut>': 1.31
     }
-    prepare_simulation(test_params)
+    # prepare_simulation(test_params)
+    prepare_simulation()

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from threading import Thread
-from typing import Dict
+from typing import Dict, List
 
 from opinions.graph.graphs import GraphManager
+from opinions.interfaces.interfaces import SimulationListener
 from opinions.objects.constants import *
 from opinions.objects.helper import *
 from opinions.objects.reference import ReferenceManager
@@ -16,6 +17,8 @@ class Simulation(Thread):
     ready = False
     verbose = False
     complex_dynamics_d: ComplexDynamics = None
+
+    listeners: List[SimulationListener] = []
 
     def __init__(self, end_step: int, complex_dynamics: ComplexDynamics, args: Dict):
         super().__init__()
@@ -37,11 +40,17 @@ class Simulation(Thread):
     def set_ready(self, ready:bool):
         self.ready = ready
 
+    def add_listener(self, listener: SimulationListener):
+        self.listeners.append(listener)
+
+    def remove_listener(self, listener: SimulationListener):
+        self.listeners.remove(listener)
+
     def run(self) -> None:
         if not self.ready:
             raise RuntimeError('Simulation NOT ready yet!. call set_ready(True) or load_simulation() first')
 
-        xFile = self.args['xFile']
+        # xFile = self.args['xFile']
         verbose = self.verbose
 
         end_step = self.end_step
@@ -59,6 +68,8 @@ class Simulation(Thread):
 
         if verbose:
             self.print_x_and_d(step, x, d)  # i.e. to the stdout
+        for listener in self.listeners:
+            listener.simulation_started((step, x))
 
         while forever or step < end_step:
             # now I have transformation (effects) matrix and x (opinions) matrix
@@ -83,14 +94,17 @@ class Simulation(Thread):
 
             if verbose:
                 self.print_x_and_d(step, x, d)
-            self.print_x_and_d(step, x, d, file=xFile)
+            # self.print_x_and_d(step, x, d, file=xFile)
+            for listener in self.listeners:
+                listener.update((step, x))
 
             if converged:
                 break
 
             step += 1
         self.current_step = step
-        xFile.close()
+        for listener in self.listeners:
+            listener.simulation_ended((step, x))
 
     def print_x_and_d(self, step: int, x: np.ndarray, d: np.ndarray, file=None):
         # TODO Move function to somewhere else (another helper class)
