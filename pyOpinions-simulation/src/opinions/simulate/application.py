@@ -7,12 +7,13 @@ from typing import Dict, List, Sequence, Union
 import numpy as np
 from networkx import DiGraph, Graph
 
+from docpie import docpie
 from opinions.graph.graphs import GraphManager
 from opinions.io.opinionsIO import OpinionsIO
 from opinions.objects.helper import randomize_matrix, normalize_matrix
 from opinions.objects.opinion import OpinionManager, IntervalOpinion, Opinion
 from opinions.objects.reference import ReferenceManager, Reference
-from opinions.simulate.docopt import docopt
+# from opinions.simulate.docopt import docopt
 from opinions.simulate.dynamics import JustAggregationComplexDynamics
 from opinions.simulate.simulation import Simulation
 
@@ -86,8 +87,9 @@ def prepare_simulation(test_params: Dict = None):
 
 Usage:
   application.py [options]
-  application.py [options] [( --topology <topology> <alpha> <gamma> <deltaIn> <deltaOut>)]
-  
+  application.py [options] [( --topology <TOPOLOGY> <topologyParams>)]
+  application.py [options] [( --selectFrom <CLSNAMES>)]
+
 Options:
   -s, --seed=SEED           Randomization seed (if omitted, use system pseudorandom generator)
   -d, --dimensions=DIMS     Number of dimensions of opinions                [Default: 3]
@@ -96,8 +98,6 @@ Options:
   --outFolder=OFOLDER       Where all output files are written              [Default: ./]
   --numOpinions=tOp         Total number of Opinions                        [Default: 256]
   --egoisticPortion=sP      How much % of the total opinions are egoistic   [Default: 0.1]
-  --selectFrom=clsNames     comma separated class names to fill the required 
-                            stubborn/egocentric from in order.
   --nu=NU                   Polarization coefficient (1. means half range)  [Default: 0.3]
   --ego=EGO                 Default ego value for all references            [Default: 4.0]
   --beta=BETA               Default interval coherence coefficient value    [Default: 0.1]
@@ -107,7 +107,10 @@ Options:
                             polarizeRef(previously polarizeSingle), and polarizeOpinion
                             (previously polarizeCouple)                     [Default: polarizeOpinion]
   --model=MODEL             The opinion dynamics model                      [Default: FCoNCaP]
-  --topology=TOPOLOGY       The interaction graph topology (2 B reorganizd) [Default: DSFG]
+  --topology=TOPOLOGY       The interaction graph topology, followed by,
+                            underscore delimited list of parameters thereof [Default: DSFG]
+  --selectFrom=CLSNAMES     underscore-separated class names to fill the required
+                            stubborn/egocentric from in order.
   --id=ID                   The simulation ID, including all necessary parameters
   --showGUI                 Show results (Do NOT do it if you are running on a remote server).
   --dt=DT                   Visual step delay in seconds (not yet used)     [Default: 0.0]
@@ -125,7 +128,8 @@ Options:
     #   -o, --out-folder=OFOLDER  Output folder where all scenarios are written   [Default: ./out]
     # """
 
-    args = docopt(doc, version='3.0.0')
+    # args = docopt(doc, version='3.0.0')
+    args = docpie(doc, version='3.0.0')
 
     # Testing purpose
     if test_params is not None:
@@ -177,7 +181,7 @@ Options:
                                  sorted([item for item in enumerate(full_list_of_polluces_ids)], key=lambda x: x[1])]
 
     # ================================================================================
-    class_names = args['--selectFrom'].split(sep=',')
+    class_names = args['--selectFrom'].split(sep='_')
     num_dimensions = int(args['--dimensions'])
     stubborn_opinions = opinion_manager.give_me_num_opinions(min_len, class_names[0], num_dimensions)
     non_stubborn_opinions = opinion_manager.give_me_num_opinions(total_num_opinions - min_len, class_names[1],
@@ -267,21 +271,21 @@ Options:
 
 
 if __name__ == '__main__':
-    test_params = {
-        # 'ego': 4,
-        # 'beta': 0.20,
-        # 'epsilon': 0.1,
-        '--id': 'test',
-
-        # '<alpha>': 0.0,
-        # '<gamma>': 0.129,
-        # '<deltaIn>': 10.82,
-        # '<deltaOut>': 1.55
-
-        '<alpha>': 0.014,
-        '<gamma>': 0.1259,
-        '<deltaIn>': 10.0,
-        '<deltaOut>': 1.31
-    }
+    # test_params = {
+    #     # 'ego': 4,
+    #     # 'beta': 0.20,
+    #     # 'epsilon': 0.1,
+    #     '--id': 'test',
+    #
+    #     # '<alpha>': 0.0,
+    #     # '<gamma>': 0.129,
+    #     # '<deltaIn>': 10.82,
+    #     # '<deltaOut>': 1.55
+    #
+    #     '<alpha>': 0.014,
+    #     '<gamma>': 0.1259,
+    #     '<deltaIn>': 10.0,
+    #     '<deltaOut>': 1.31
+    # }
     # prepare_simulation(test_params)
     prepare_simulation()

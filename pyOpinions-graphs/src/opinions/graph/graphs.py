@@ -30,14 +30,16 @@ class GraphManager:
             if model_name == 'DSFG':
                 g = nx.OrderedDiGraph()
                 g.name = graph_name
-                alpha = float(graph_params['<alpha>'])
-                gamma = float(graph_params['<gamma>'])
-                delta_in = float(graph_params['<deltaIn>'])
-                delta_out = float(graph_params['<deltaOut>'])
+                # alpha = float(graph_params['<alpha>'])
+                # gamma = float(graph_params['<gamma>'])
+                # delta_in = float(graph_params['<deltaIn>'])
+                # delta_out = float(graph_params['<deltaOut>'])
+                alpha, gamma, delta_in, delta_out = map(
+                    lambda x: float(x), graph_params['<topologyParams>'].split(sep='_'))
                 my_scale_free_graph(num_nodes, alpha=alpha, beta=(1. - alpha - gamma), gamma=gamma,
                                            delta_in=delta_in, delta_out=delta_out, create_using=g, seed=seed)
             else:
-                raise NotImplementedError('Graph model NOT Yet Implemented')
+                raise NotImplementedError('Graph model NOT Yet Implemented: ' + model_name)
 
         elif graph_name == 'intervals':
             # NOTE: Graph is NOT directed
