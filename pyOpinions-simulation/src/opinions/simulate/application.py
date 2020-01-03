@@ -39,8 +39,8 @@ def egoboost_opinions(egoistics: Union[Sequence[int], Sequence[Opinion]], beta: 
         '''
         # TODO Again, notice that next two lines works only as we have intervals and points. If we change the
         #  representation or add new opinion types, we would have to rewrite them.
-        c_in_degree = castors_graph.in_degree(opinion.references[0])
-        p_in_degree = polluces_graph.in_degree(opinion.references[-1])
+        c_in_degree = castors_graph.in_degree(opinion.references[0].absolute_id)
+        p_in_degree = polluces_graph.in_degree(opinion.references[-1].absolute_id)
         min_in = min(c_in_degree, p_in_degree)
         paranoid_ego = paranoid_coeff * 2.0 * min_in + beta * (1 - (2 * min_in))
         for ref in opinion.references:
@@ -262,7 +262,7 @@ Options:
     opinions_io.simulation_starting((graph_manager, opinion_manager))
     # TODO Check that we indicate different references and their class types well
 
-    simulation = Simulation(2000, complex_dynamics, args)
+    simulation = Simulation(10000, complex_dynamics, args)
     simulation.add_listener(opinions_io)
     simulation.set_ready(True)
     simulation.start()

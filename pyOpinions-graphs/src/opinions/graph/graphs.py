@@ -61,14 +61,22 @@ class GraphManager:
 
     @staticmethod
     def translate_graph(source: Graph, mapping: List[int]):
-        if len(mapping) != len(source.nodes):
-            raise ValueError("mapping length is %d while graph length is %d" % (len(mapping), len(source.edges)))
         # new_edges = [(mapping[v], mapping[w], attr) for v, w, attr in source.edges().data()]
         # g = nx.Graph()
         # g.add_edges_from(new_edges)
         # # Add more properties if you want
         # return g
-        nx.relabel_nodes(source, lambda x: mapping[x], copy=False)
+
+        if len(mapping) == len(source.nodes):
+            # nx.relabel_nodes(source, mapping= lambda x: mapping[x], copy=False)
+            offset = len(mapping)
+            nx.relabel_nodes(source, mapping=lambda x: offset + mapping[x], copy=False)
+            nx.relabel_nodes(source, mapping=lambda x: x - offset, copy=False)
+        # elif len(mapping) < len(source.nodes):
+        #     map_dict = dict(zip(range(len(mapping)), mapping))
+        #     nx.relabel_nodes(source, mapping=map_dict, copy=False)
+        else:
+            raise ValueError("mapping length is %d while graph length is %d" % (len(mapping), len(source.edges)))
 
     @staticmethod
     def extract_dictionary(g: Graph, name) -> List:
