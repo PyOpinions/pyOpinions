@@ -96,14 +96,14 @@ Options:
   -l, --log=LFILE           Log file (if omitted or -, output to stdout)    [Default: -]
   --inFolder=IFOLDER        I don't know. Just in case                      [Default: ./]
   --outFolder=OFOLDER       Where all output files are written              [Default: ./]
-  --numOpinions=tOp         Total number of Opinions                        [Default: 256]
-  --egoisticPortion=sP      How much % of the total opinions are egoistic   [Default: 0.1]
+  --numOpinions=NOP         Total number of Opinions                        [Default: 256]
+  --egoisticPortion=EGOPOR  How much % of the total opinions are egoistic   [Default: 0.1]
   --nu=NU                   Polarization coefficient (1. means half range)  [Default: 0.3]
   --ego=EGO                 Default ego value for all references            [Default: 4.0]
   --beta=BETA               Default interval coherence coefficient value    [Default: 0.1]
   --epsilon=EPSILON         Default interaction distance bias value         [Default: 0.1]
   --egoPortion=EGOISTICS    portion (of 1.0) of opinions who are egocentric [Default: 0.0]
-  --manageStubborn          How to manage the stubborn opinions. values are none, 
+  --manageStubborn=MANGMNT  How to manage the stubborn opinions. values are none, 
                             polarizeRef(previously polarizeSingle), and polarizeOpinion
                             (previously polarizeCouple)                     [Default: polarizeOpinion]
   --model=MODEL             The opinion dynamics model                      [Default: FCoNCaP]
@@ -118,15 +118,6 @@ Options:
   --version                 Prints the version and exits.
   --verbose                 Prints a lot of information details.
 """
-
-    # """
-    #  application.py [options] [( --selectFrom <className>... )]
-    # --selectFrom point interval interval
-    #     numCouples --> numOpinions
-    #   --intervalsPortion=iP     How much % of the total opinions are intervals  [Default: 0.9]
-    #   -i, --in-folder=IFOLDER   input folder where all means/variances are.     [Default: ./]
-    #   -o, --out-folder=OFOLDER  Output folder where all scenarios are written   [Default: ./out]
-    # """
 
     # args = docopt(doc, version='3.0.0')
     args = docpie(doc, version='3.0.0')
