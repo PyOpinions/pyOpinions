@@ -93,10 +93,12 @@ class Simulation(Thread):
             print('Step = %d, Total Diff = %8.5E, Converged = %r' % (step, total_abs_dist, converged))
 
             if verbose:
-                self.print_x_and_d(step, x, d)
+                # self.print_x_and_d(step, x, d)
+                self.print_x_and_d(step, temp_x, d)  # TODO Using temp_x is a work around, not a final solution
             # self.print_x_and_d(step, x, d, file=xFile)
             for listener in self.listeners:
-                listener.update((step, x))
+                # listener.update((step, x))
+                listener.update((step, temp_x))  # TODO Using temp_x instead of x is a work around, not a final solution
 
             if converged:
                 break
