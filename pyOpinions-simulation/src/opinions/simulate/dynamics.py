@@ -28,12 +28,13 @@ class IntervalCoherenceDynamics(OpinionDynamics):
 
     def init(self, graphs: Dict[str, Graph]):
         g = graphs['intervals']
+        opinion_manager = OpinionManager()
         # self.epsilon = g.graph['epsilon']
         for i, j in g.edges():
-            if OpinionManager.opinion_id_from_ref_id(i) != OpinionManager.opinion_id_from_ref_id(j):
+            if opinion_manager.opinion_id_from_ref_id(i) != opinion_manager.opinion_id_from_ref_id(j):
                 raise IndexError('opinion of i != that of j (%d in %d, %d in %d)'
-                                 % (i, OpinionManager.opinion_id_from_ref_id(i), j,
-                                    OpinionManager.opinion_id_from_ref_id(i)))
+                                 % (i, opinion_manager.opinion_id_from_ref_id(i), j,
+                                    opinion_manager.opinion_id_from_ref_id(i)))
 
     def calculate_update(self, graphs: Dict[str, Graph]) -> List[Tuple[int, int, Any]]:
         ret = []

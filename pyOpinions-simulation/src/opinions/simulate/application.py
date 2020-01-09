@@ -97,7 +97,6 @@ Options:
   --inFolder=IFOLDER        I don't know. Just in case                      [Default: ./]
   --outFolder=OFOLDER       Where all output files are written              [Default: ./]
   --numOpinions=NOP         Total number of Opinions                        [Default: 256]
-  --egoisticPortion=EGOPOR  How much % of the total opinions are egoistic   [Default: 0.1]
   --nu=NU                   Polarization coefficient (1. means half range)  [Default: 0.3]
   --ego=EGO                 Default ego value for all references            [Default: 4.0]
   --beta=BETA               Default interval coherence coefficient value    [Default: 0.1]
@@ -118,6 +117,8 @@ Options:
   --version                 Prints the version and exits.
   --verbose                 Prints a lot of information details.
 """
+
+  # --egoisticPortion=EGOPOR  How much % of the total opinions are egoistic   [Default: 0.1]
 
     # args = docopt(doc, version='3.0.0')
     args = docpie(doc, version='3.0.0')
@@ -190,18 +191,6 @@ Options:
     graph_manager.translate_graph(polluces_points_graph, references_polluces_mapping)
 
     # ================================================================================
-    # interval_portion = float(args['--intervalsPortion'])  # removed
-    # num_interval_opinions = int(total_num_opinions * interval_portion)
-    # num_point_opinions = total_num_opinions - num_interval_opinions
-    #
-    # interval_opinions = opinion_manager.give_me_num_opinions(num_interval_opinions, 'interval', num_dimensions)
-    # point_opinions = opinion_manager.give_me_num_opinions(num_point_opinions, 'point', num_dimensions)
-    # all_opinions = interval_opinions + point_opinions
-    #
-    # mapping = [ref.absolute_id for ref in itertools.chain(*[opinion.get_references for opinion in all_opinions])
-    #            if ref.name in ('castor', 'point')]
-    # graph_manager.translate_graph(castors_points_graph, mapping)
-    #
     # mapping = [ref.absolute_id for ref in itertools.chain(*[opinion.get_references for opinion in all_opinions])
     #            if ref.name in ('pollux', 'point')]
     # graph_manager.translate_graph(polluces_points_graph, mapping)
@@ -229,7 +218,7 @@ Options:
     egoboost_opinions(list(egoboosting_candidates), args['beta'], 5)  # TODO parameterize this "5" later
 
     opinions_io = OpinionsIO()
-    files = opinions_io.open_output_files(args)
+    opinions_io.open_output_files(args)
     # args.update(**files)
 
     num_references = reference_manager.num_references()
@@ -250,10 +239,10 @@ Options:
     normalize_matrix(positions_matrix_x)
 
     # write graphs and ego values to their respective files here.
-    opinions_io.simulation_starting((graph_manager, opinion_manager))
+    opinions_io.simulation_starting((graph_manager, reference_manager, opinion_manager))
     # TODO Check that we indicate different references and their class types well
 
-    simulation = Simulation(10000, complex_dynamics, args)
+    simulation = Simulation(5000, complex_dynamics, args)
     simulation.add_listener(opinions_io)
     simulation.set_ready(True)
     simulation.start()

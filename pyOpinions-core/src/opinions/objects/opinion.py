@@ -4,8 +4,6 @@ from typing import List
 
 from opinions.objects.reference import Reference, ReferenceManager
 
-ref_id_to_opinion_id: List[int] = []
-
 
 class Opinion:
     references: List[Reference] = []
@@ -59,10 +57,13 @@ class OpinionManager:
     _instance: OpinionManager = None
     opinions: List[Opinion] = None
 
+    _ref_id_to_opinion_id: List[int] = None
+
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(OpinionManager, cls).__new__(cls, *args, **kwargs)
-            cls._instance.opinions = []
+            cls._instance.opinions = list()
+            cls._instance._ref_id_to_opinion_id = []
         return cls._instance
 
     def give_me_num_opinions(self, num_opinions: int, opinion_class_name: str, num_dimensions: int) -> List[Opinion]:
@@ -79,24 +80,23 @@ class OpinionManager:
             new_opinion = IntervalOpinion([castor, pollux])
             id = len(self.opinions)
             self.opinions.append(new_opinion)
-            ref_id_to_opinion_id.append(id)
-            ref_id_to_opinion_id.append(id)
+            self._ref_id_to_opinion_id.append(id)
+            self._ref_id_to_opinion_id.append(id)
             return new_opinion
         elif op_type == 'point':
             p = reference_manager.new_reference([0.0] * num_dimensions)
             new_opinion = PointOpinion([p])
             id = len(self.opinions)
             self.opinions.append(new_opinion)
-            ref_id_to_opinion_id.append(id)
+            self._ref_id_to_opinion_id.append(id)
             return new_opinion
         else:
             raise NotImplementedError('Opinion Type not known: '+op_type)
 
-    @classmethod
-    def opinion_id_from_ref_id(cls, ref_id: int) -> int:
+    def opinion_id_from_ref_id(self, ref_id: int) -> int:
         # TODO accept iterable
         # TODO Empty iterable -> all references
-        return ref_id_to_opinion_id[ref_id]
+        return self._ref_id_to_opinion_id[ref_id]
 
 
 if __name__ == '__main__':
