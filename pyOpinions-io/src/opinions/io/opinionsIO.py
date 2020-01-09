@@ -113,7 +113,7 @@ class OpinionsIO (SimulationListener):
         # later add the ability to store change in topology graph
         if len(state) == 2:
             self.xPickler.dump(state)
-        elif len(state) == 2:
+        elif len(state) > 2:
             self.xPickler.dump((state[0], state[1]))
             self.topologyPickler.dump(state[2])
         else:

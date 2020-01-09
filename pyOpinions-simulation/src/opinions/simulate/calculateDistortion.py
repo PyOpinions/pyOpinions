@@ -18,107 +18,7 @@ from opinions.simulate.votingClasses import Utility, ExponentialBordaUtility, Pl
     TieBreakingRule, LexicographicalTieBreakingRule, PositionalScoringRule, VotingRule
 
 NUM_EXPERIMENTS = 50
-
-
-def give_me_x_different_combinations(n_full_list: List[int], r: int, how_many_needed: int, random: Random) -> List[List[int]]:
-    n = len(n_full_list)
-    ret = []
-    if n == r:
-        print(f'Warning: N = K = ({n}). We will return ({how_many_needed}) duplicates of the full list')
-        for i in range(how_many_needed):
-            ret.append(n_full_list)
-        return ret
-    for i in range(how_many_needed):
-        accumulator = set()
-        while len(accumulator) < r:
-            accumulator.add(random.choice(n_full_list))
-        ret.append(sorted(list(accumulator)))
-    return ret
-
-
-# def ncr(n, r):
-#     r = min(r, n-r)
-#     numer = reduce(op.mul, range(n, n-r, -1), 1)
-#     denom = factorial(r)
-#     return numer / denom
-#
-
-def interval_reference_distance(opinion_i: IntervalOpinion, point_cj: Reference, cache:Tuple = None) -> float:
-    if cache:
-        point_ci, point_pi, vector_v1, v1_v1_dot_product = cache
-    else:
-        point_ci = opinion_i.references[0]
-        point_pi = opinion_i.references[1]
-        # point_cj = opinion_j.references[0]
-
-        vector_v1 = point_ci.anchors - point_pi.anchors
-        # equals | v1 | ^ 2
-        v1_v1_dot_product: float = vector_v1 @ vector_v1
-
-    # effect of pair (Ci, Pi) on point Cj
-    vector_v2 = point_cj.anchors - point_pi.anchors
-    # the dot product is |v1| * |v2| * cos (theta)
-    v1v2_dot_product: float = vector_v1 @ vector_v2
-
-    if v1v2_dot_product <= 0:
-        # point Cj projection is before or on Pi.
-        # alpha, one_minus_alpha = 0, 1
-        y_c = point_pi
-    elif v1v2_dot_product >= v1_v1_dot_product:
-        # in the line above, notice that v1v1DotProduct actually equals vectorV1LenSqr |v1| * |v1| * cos(0)
-
-        # point Cj projection is on or after Ci.
-        # alpha, one_minus_alpha = 1, 0
-        y_c = point_ci
-    else:
-        alpha = v1v2_dot_product / v1_v1_dot_product
-        one_minus_alpha = 1 - alpha
-        y_c = Reference(-1, coordinates=(point_ci.anchors * alpha + point_pi.anchors * one_minus_alpha))
-
-    return y_c.distance_to(point_cj)
-
-
-def print_header(utility_functions: List[Utility],
-                 list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]],
-                 extended: bool, out_file):
-    out_file.write('step\t')
-    utility_names = ['xb', 'p', 'v']
-    candidates = [3, 6]
-    source = ["100%F", "50%F", "0%F"]
-    # individual_id: List[str] = []
-    # group_size, max = None, None
-    if extended:
-        group_size = NUM_EXPERIMENTS
-        individual_id = [str(i + 1) for i in range(NUM_EXPERIMENTS)]
-        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
-    else:
-        group_size = 2
-        individual_id = ['M', 'V']
-        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) // \
-              NUM_EXPERIMENTS * group_size
-
-    for i in range(max):
-        individual_index = i % group_size
-        reminder = i // group_size
-        utility_index = reminder // 6
-        reminder %= 6
-        candidates_no = reminder // 3
-        reminder %= 3
-        out_file.write("U%s_C%d_%s_%s\t" % (utility_names[utility_index], candidates[candidates_no], source[reminder],
-                                            individual_id[individual_index]))
-
-    out_file.write('\n')
-
-
-def elect(all_distances: np.ndarray, step_index: int, tie_breaking_rule: TieBreakingRule, voting_rule: VotingRule,
-          utility_function: Utility, iteration_candidate_ids: List[int], iteration_voters_ids: List[int]):
-    all_candidates_scores: List[Dict[int, int]] = []
-    for voter_id in iteration_voters_ids:
-        candidates_distances_per_voter = {candidate_id: all_distances[candidate_id, voter_id]
-                                          for candidate_id in iteration_candidate_ids}
-        candidates_score_for_this_voter = utility_function.score_candidates(candidates_distances_per_voter)
-        all_candidates_scores.append(candidates_score_for_this_voter)
-    return voting_rule.find_winner(all_candidates_scores, tie_breaking_rule)
+float_and_delimiter = '%8.5E\t'
 
 
 def main(test_params: Dict = None):
@@ -249,12 +149,11 @@ def main(test_params: Dict = None):
                 continue
             to_calculate_dist[i, j] = to_calculate_dist[j, i] = True
 
-    float_and_delimiter = '%8.5E\t'
-
     # advance step and skip some steps if needed
     skip = int(args['--step'])
     step_index, prev_step = 0, 0 - skip
     more_to_parse = True
+    current_state = None
     while more_to_parse:
         try:
             step_index, current_state = opinions_i.retrieve_step_and_x()
@@ -268,9 +167,9 @@ def main(test_params: Dict = None):
         prev_step = step_index
 
         # use the new state
+        # TODO These coming 2 lines may be of no use after fixing the pickling / unpicking protocol
         for i, ref in enumerate(reference_manager.references):
             ref.set_to(current_state[i])
-
 
         # ======== calculate the distances =========================
         for i in all_already_selected_candidates_ids:
@@ -360,6 +259,107 @@ def main(test_params: Dict = None):
     print('All done!')
     out_file.close()
     summary_file.close()
+
+
+def give_me_x_different_combinations(n_full_list: List[int], r: int, how_many_needed: int, random: Random) -> List[List[int]]:
+    n = len(n_full_list)
+    ret = []
+    if n == r:
+        print(f'Warning: N = K = ({n}). We will return ({how_many_needed}) duplicates of the full list')
+        for i in range(how_many_needed):
+            ret.append(n_full_list)
+        return ret
+    for i in range(how_many_needed):
+        accumulator = set()
+        while len(accumulator) < r:
+            accumulator.add(random.choice(n_full_list))
+        ret.append(sorted(list(accumulator)))
+    return ret
+
+
+# def ncr(n, r):
+#     r = min(r, n-r)
+#     numer = reduce(op.mul, range(n, n-r, -1), 1)
+#     denom = factorial(r)
+#     return numer / denom
+#
+
+def interval_reference_distance(opinion_i: IntervalOpinion, point_cj: Reference, cache:Tuple = None) -> float:
+    if cache:
+        point_ci, point_pi, vector_v1, v1_v1_dot_product = cache
+    else:
+        point_ci = opinion_i.references[0]
+        point_pi = opinion_i.references[1]
+        # point_cj = opinion_j.references[0]
+
+        vector_v1 = point_ci.anchors - point_pi.anchors
+        # equals | v1 | ^ 2
+        v1_v1_dot_product: float = vector_v1 @ vector_v1
+
+    # effect of pair (Ci, Pi) on point Cj
+    vector_v2 = point_cj.anchors - point_pi.anchors
+    # the dot product is |v1| * |v2| * cos (theta)
+    v1v2_dot_product: float = vector_v1 @ vector_v2
+
+    if v1v2_dot_product <= 0:
+        # point Cj projection is before or on Pi.
+        # alpha, one_minus_alpha = 0, 1
+        y_c = point_pi
+    elif v1v2_dot_product >= v1_v1_dot_product:
+        # in the line above, notice that v1v1DotProduct actually equals vectorV1LenSqr |v1| * |v1| * cos(0)
+
+        # point Cj projection is on or after Ci.
+        # alpha, one_minus_alpha = 1, 0
+        y_c = point_ci
+    else:
+        alpha = v1v2_dot_product / v1_v1_dot_product
+        one_minus_alpha = 1 - alpha
+        y_c = Reference(-1, coordinates=(point_ci.anchors * alpha + point_pi.anchors * one_minus_alpha))
+
+    return y_c.distance_to(point_cj)
+
+
+def print_header(utility_functions: List[Utility],
+                 list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]],
+                 extended: bool, out_file):
+    out_file.write('step\t')
+    utility_names = ['xb', 'p', 'v']
+    candidates = [3, 6]
+    source = ["100%F", "50%F", "0%F"]
+    # individual_id: List[str] = []
+    # group_size, max = None, None
+    if extended:
+        group_size = NUM_EXPERIMENTS
+        individual_id = [str(i + 1) for i in range(NUM_EXPERIMENTS)]
+        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
+    else:
+        group_size = 2
+        individual_id = ['M', 'V']
+        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) // \
+              NUM_EXPERIMENTS * group_size
+
+    for i in range(max):
+        individual_index = i % group_size
+        reminder = i // group_size
+        utility_index = reminder // 6
+        reminder %= 6
+        candidates_no = reminder // 3
+        reminder %= 3
+        out_file.write("U%s_C%d_%s_%s\t" % (utility_names[utility_index], candidates[candidates_no], source[reminder],
+                                            individual_id[individual_index]))
+
+    out_file.write('\n')
+
+
+def elect(all_distances: np.ndarray, step_index: int, tie_breaking_rule: TieBreakingRule, voting_rule: VotingRule,
+          utility_function: Utility, iteration_candidate_ids: List[int], iteration_voters_ids: List[int]):
+    all_candidates_scores: List[Dict[int, int]] = []
+    for voter_id in iteration_voters_ids:
+        candidates_distances_per_voter = {candidate_id: all_distances[candidate_id, voter_id]
+                                          for candidate_id in iteration_candidate_ids}
+        candidates_score_for_this_voter = utility_function.score_candidates(candidates_distances_per_voter)
+        all_candidates_scores.append(candidates_score_for_this_voter)
+    return voting_rule.find_winner(all_candidates_scores, tie_breaking_rule)
 
 
 def id2argv(id_str):
