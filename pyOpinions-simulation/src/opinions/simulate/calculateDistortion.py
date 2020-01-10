@@ -1,3 +1,4 @@
+import math
 import os
 import os
 import sys
@@ -191,18 +192,32 @@ def main(test_params: Dict = None):
                     continue
 
                 opinion_j = opinion_manager.opinions[j]
+                point_ci = opinion_i.references[0]
+                point_cj = opinion_j.references[0]
                 if isinstance(opinion_i, PointOpinion):
                     if isinstance(opinion_j, PointOpinion):
-                        distance = opinion_i.references[0].distance_to(opinion_j.references[0])
+                        distance = point_ci.distance_to(point_cj)
                     else:  # opinion_j is an instance of IntervalOpinion
-                        distance = interval_reference_distance(opinion_j, opinion_i.references[0])
+                        point_pj = opinion_j.references[1]
+                        if point_in_segment(point_ci, point_cj, point_pj):
+                            distance = 0
+                        else:
+                            distance = interval_reference_distance(opinion_j, point_ci)
                 else:  # opinion_i is an instance of IntervalOpinion
                     if isinstance(opinion_j, PointOpinion):
-                        distance = interval_reference_distance(opinion_i, opinion_j.references[0], cache)
+                        point_pi = opinion_i.references[1]
+                        if point_in_segment(point_cj, point_ci, point_pi):
+                            distance = 0
+                        else:
+                            distance = interval_reference_distance(opinion_i, point_cj, cache)
                     else:  # Both are intervals
-                        distance0 = interval_reference_distance(opinion_i, opinion_j.references[0], cache)
-                        distance1 = interval_reference_distance(opinion_i, opinion_j.references[1], cache)
-                        distance = distance0 if distance0 < distance1 else distance1
+                        point_pi, point_pj = opinion_i.references[1], opinion_j.references[1]
+                        if do_intersect(point_ci, point_pi, point_cj, point_pj):
+                            distance = 0
+                        else:
+                            distance0 = interval_reference_distance(opinion_i, point_cj, cache)
+                            distance1 = interval_reference_distance(opinion_i, point_pj, cache)
+                            distance = distance0 if distance0 < distance1 else distance1
 
                 all_distances[i, j] = all_distances[j, i] = distance  # because the candidate may be a voter some day
 
@@ -259,6 +274,86 @@ def main(test_params: Dict = None):
     print('All done!')
     out_file.close()
     summary_file.close()
+
+
+def point_in_segment(p: Reference, p1: Reference, q1: Reference):
+    """check if point p lies on segment 'p1q1'"""
+    o1: int = orientation(p1, q1, p)
+    # p1, q1 and p2 are colinear and p2 lies on segment p1q1
+    return o1 == 0 and on_segment(p1, p, q1)
+
+
+def do_intersect(p1: Reference, q1: Reference, p2: Reference, q2: Reference) -> bool:
+    """ test whether line segments 'p1q1' and 'p2q2' intersect.
+    Based on code from http://geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+    :param p1:
+    :type p1:
+    :param q1:
+    :type q1:
+    :param p2:
+    :type p2:
+    :param q2:
+    :type q2:
+    :return:
+    :rtype:
+    """
+    # Find the four orientations needed for general and special cases
+    o1: int = orientation(p1, q1, p2)
+    o2: int = orientation(p1, q1, q2)
+    o3: int = orientation(p2, q2, p1)
+    o4: int = orientation(p2, q2, q1)
+
+    # General case
+    if o1 != o2 and o3 != o4:
+        return True
+
+    # Special Cases
+    # p1, q1 and p2 are colinear and p2 lies on segment p1q1
+    if o1 == 0 and on_segment(p1, p2, q1):
+        return True
+
+    # p1, q1 and q2 are colinear and q2 lies on segment p1q1
+    if o2 == 0 and on_segment(p1, q2, q1):
+        return True
+
+    # p2, q2 and p1 are colinear and p1 lies on segment p2q2
+    if o3 == 0 and on_segment(p2, p1, q2):
+        return True
+
+    # p2, q2 and q1 are colinear and q1 lies on segment p2q2
+    if o4 == 0 and on_segment(p2, q1, q2):
+        return True
+
+    return False  # Doesn 't fall in any of the above cases
+
+
+def orientation(p: Reference, q: Reference, r: Reference) -> int:
+    """find orientation of ordered triplet (p, q, r).
+
+    See https://www.geeksforgeeks.org/orientation-3-ordered-points/
+    for details of below formula.
+    :param p: point 1
+    :type p: Reference
+    :param q: point 2
+    :type q: Reference
+    :param r: point 3
+    :type r: Reference
+    :return: 0 if they are colinear, 1 if clockwise, 2 counterclockwise
+    :rtype: int
+    """
+    val = (q.anchors[1] - p.anchors[1]) * (r.anchors[0] - q.anchors[0]) - \
+          (q.anchors[0] - p.anchors[0]) * (r.anchors[1] - q.anchors[1])
+
+    if abs(val) < 3e-6:  # middle between 2e-6 and 3e-6
+        return 0  # colinear
+
+    return 1 if val > 0 else 2  # clock or counterclock wise
+
+
+def on_segment(p: Reference, q: Reference, r: Reference) -> bool:
+    """check if point q lies on line segment 'pr'"""
+    return min(p.anchors[0], r.anchors[0]) <= q.anchors[0] <= max(p.anchors[0], r.anchors[0]) and \
+           min(p.anchors[1], r.anchors[1]) <= q.anchors[1] <= max(p.anchors[1], r.anchors[1])
 
 
 def give_me_x_different_combinations(n_full_list: List[int], r: int, how_many_needed: int, random: Random) -> List[List[int]]:
