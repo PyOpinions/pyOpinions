@@ -1,11 +1,9 @@
-import math
-import os
 import os
 import sys
 from itertools import chain
 from pickle import UnpicklingError
 from random import Random
-from typing import Dict, List, Set, Tuple
+from typing import Set, Tuple
 
 import numpy as np
 from networkx import DiGraph
@@ -15,8 +13,7 @@ from opinions.graph.graphs import GraphManager
 from opinions.io.opinionsIO import OpinionsIO
 from opinions.objects.opinion import OpinionManager, PointOpinion, IntervalOpinion
 from opinions.objects.reference import Reference
-from opinions.simulate.votingClasses import Utility, ExponentialBordaUtility, PluralityUtility, VetoUtility, \
-    TieBreakingRule, LexicographicalTieBreakingRule, PositionalScoringRule, VotingRule
+from opinions.simulate.votingClasses import *
 
 NUM_EXPERIMENTS = 50
 float_and_delimiter = '%8.5E\t'
@@ -66,7 +63,7 @@ def main(test_params: Dict = None):
     id_str: str = args['--id']
     if id_str:
         argv = id2argv(id_str)
-        args_id = docpie(__doc__, argv=argv, version='3.0.0')
+        args_id = docpie(__doc__, argv=argv, version='3.0.0')  # TODO test this after correction
         # individual parameters have higher priority than those coming from the ID field
         args_id.update(args)
         args = args_id
@@ -105,7 +102,6 @@ def main(test_params: Dict = None):
     args['summary'] = summary_file
 
     n = int(args['--numOpinions'])
-    all_distances = np.empty((n, n, 1), dtype='f4')  # TODO Review
     fixed_reference_ids_set = find_fixed_references_ids(graph_manager, args)
     all_opinion_ids = list(range(len(opinion_manager.opinions)))
     all_fixed_opinion_ids = sorted(list({opinion_manager.opinion_id_from_ref_id(i) for i in fixed_reference_ids_set}))
@@ -116,22 +112,25 @@ def main(test_params: Dict = None):
         if target_num_candidates > len(all_fixed_opinion_ids):
             print("%s has only %d fully fixed candidates. Not processed." % (run_id, len(all_fixed_opinion_ids)))
             return
-        fifty_lists_of_combinations_of_x_cand_all_from_fixed: List[List[int]] = give_me_x_different_combinations(all_fixed_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
-        fifty_lists_of_combinations_of_x_cand_half_from_fixed: List[List[int]] = []
-        fifty_lists_of_combinations_of_x_cand_none_from_fixed: List[List[int]] = give_me_x_different_combinations(all_mobile_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
+        fifty_lists_of_combinations_of_x_candidates_all_from_fixed: List[List[int]] = give_me_x_different_combinations(
+            all_fixed_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
+        fifty_lists_of_combinations_of_x_candidates_half_from_fixed: List[List[int]] = []
+        fifty_lists_of_combinations_of_x_candidates_none_from_fixed: List[List[int]] = give_me_x_different_combinations(
+            all_mobile_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
         half_target_num_candidates = int(1.0 * target_num_candidates / 2.0)
 
         for i in range(NUM_EXPERIMENTS):
             fixed_half = give_me_x_different_combinations(all_fixed_opinion_ids, half_target_num_candidates, 1, random)
-            mobile_half = give_me_x_different_combinations(all_mobile_opinion_ids, target_num_candidates - half_target_num_candidates, 1, random)
-            fifty_lists_of_combinations_of_x_cand_half_from_fixed.append(fixed_half[0] + mobile_half[0])
+            mobile_half = give_me_x_different_combinations(
+                all_mobile_opinion_ids, target_num_candidates - half_target_num_candidates, 1, random)
+            fifty_lists_of_combinations_of_x_candidates_half_from_fixed.append(fixed_half[0] + mobile_half[0])
 
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_cand_all_from_fixed)
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_cand_half_from_fixed)
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_cand_none_from_fixed)
+        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_all_from_fixed)
+        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_half_from_fixed)
+        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_none_from_fixed)
 
     all_already_selected_candidates_ids: Set[int] = set()
-    list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int],List[int]]] = []
+    list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]] = []
     for lst in chain(*list_of_fifty_lists_of_candidates_ids):
         all_already_selected_candidates_ids.update(lst)
         list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists.append(
@@ -200,24 +199,29 @@ def main(test_params: Dict = None):
                     else:  # opinion_j is an instance of IntervalOpinion
                         point_pj = opinion_j.references[1]
                         if point_in_segment(point_ci, point_cj, point_pj):
-                            distance = 0
+                            distance = 0.
                         else:
                             distance = interval_reference_distance(opinion_j, point_ci)
                 else:  # opinion_i is an instance of IntervalOpinion
                     if isinstance(opinion_j, PointOpinion):
                         point_pi = opinion_i.references[1]
                         if point_in_segment(point_cj, point_ci, point_pi):
-                            distance = 0
+                            distance = 0.
                         else:
                             distance = interval_reference_distance(opinion_i, point_cj, cache)
                     else:  # Both are intervals
                         point_pi, point_pj = opinion_i.references[1], opinion_j.references[1]
                         if do_intersect(point_ci, point_pi, point_cj, point_pj):
-                            distance = 0
+                            distance = 0.
                         else:
                             distance0 = interval_reference_distance(opinion_i, point_cj, cache)
-                            distance1 = interval_reference_distance(opinion_i, point_pj, cache)
-                            distance = distance0 if distance0 < distance1 else distance1
+                            if abs(distance0) < 2e-6:
+                                distance = 0.
+                            else:
+                                distance1 = interval_reference_distance(opinion_i, point_pj, cache)
+                                distance = distance0 if distance0 < distance1 else distance1
+                                if abs(distance) < 2e-6:
+                                    distance = 0.
 
                 all_distances[i, j] = all_distances[j, i] = distance  # because the candidate may be a voter some day
 
@@ -227,11 +231,10 @@ def main(test_params: Dict = None):
             print_header(utility_functions, list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists,
                          False, summary_file)
 
-        index_in_group: int = -1
         mean, variance = 0.0, 0.0
 
-        out_file.write('%d\t' % step_index)
-        summary_file.write('%d\t' % step_index)
+        out_file.write('%04d\t' % step_index)
+        summary_file.write('%04d\t' % step_index)
         for utility_function in utility_functions:
             for i in range(len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)):
                 index_in_group = i % NUM_EXPERIMENTS
@@ -256,12 +259,12 @@ def main(test_params: Dict = None):
                 mean += distortion
                 variance += distortion**2
                 out_file.write(float_and_delimiter % distortion)
-                if index_in_group == NUM_EXPERIMENTS - 1:  # This should identify when we finish the 50 exps of the group
+                if index_in_group == NUM_EXPERIMENTS - 1:  # This identifies when we finish the 50 exps of the group
                     #  --- similar check above for the beginning of a group to reset mean and var
                     mean /= NUM_EXPERIMENTS  # divided by 50
-                    variance /= NUM_EXPERIMENTS # divided by 50
+                    variance /= NUM_EXPERIMENTS  # divided by 50
                     variance -= mean ** 2
-                    variance *= 1.0 * NUM_EXPERIMENTS / (NUM_EXPERIMENTS - 1) # this is to produce unbiased variance estimate
+                    variance *= 1.0 * NUM_EXPERIMENTS / (NUM_EXPERIMENTS - 1)  # To produce unbiased variance estimate
                     summary_file.write(float_and_delimiter % mean)
                     summary_file.write(float_and_delimiter % variance)
                     mean = variance = 0.0  # This is the correct reset point ---
@@ -356,7 +359,8 @@ def on_segment(p: Reference, q: Reference, r: Reference) -> bool:
            min(p.anchors[1], r.anchors[1]) <= q.anchors[1] <= max(p.anchors[1], r.anchors[1])
 
 
-def give_me_x_different_combinations(n_full_list: List[int], r: int, how_many_needed: int, random: Random) -> List[List[int]]:
+def give_me_x_different_combinations(n_full_list: List[int], r: int, how_many_needed: int, random: Random) \
+        -> List[List[int]]:
     n = len(n_full_list)
     ret = []
     if n == r:
@@ -426,14 +430,14 @@ def print_header(utility_functions: List[Utility],
     if extended:
         group_size = NUM_EXPERIMENTS
         individual_id = [str(i + 1) for i in range(NUM_EXPERIMENTS)]
-        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
+        header_limit = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
     else:
         group_size = 2
         individual_id = ['M', 'V']
-        max = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) // \
-              NUM_EXPERIMENTS * group_size
+        header_limit = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) // \
+                       NUM_EXPERIMENTS * group_size
 
-    for i in range(max):
+    for i in range(header_limit):
         individual_index = i % group_size
         reminder = i // group_size
         utility_index = reminder // 6
@@ -457,9 +461,11 @@ def elect(all_distances: np.ndarray, step_index: int, tie_breaking_rule: TieBrea
     return voting_rule.find_winner(all_candidates_scores, tie_breaking_rule)
 
 
-def id2argv(id_str):
+def id2argv(id_str) -> List[str]:
     params = '--' + id_str.replace(',', ' --').replace('=', ' ')
-    return ['command'].extend(params.split(' '))
+    ret = ['command']
+    ret.extend(params.split(' '))
+    return ret
 
 
 def find_fixed_opinions_ids(graph_manager: GraphManager, args: Dict) -> List[int]:
