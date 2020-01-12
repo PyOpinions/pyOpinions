@@ -59,14 +59,21 @@ def main(test_params: Dict = None):
     # The priority is : hardcoded params for testing >> individual arguments passed to cmd >> params parsed from id
     args = docpie(__doc__, version='3.0.0')
 
-    # Use ID as a source of parameters as well.
-    id_str: str = args['--id']
-    if id_str:
-        argv = id2argv(id_str)
-        args_id = docpie(__doc__, argv=argv, version='3.0.0')  # TODO test this after correction
-        # individual parameters have higher priority than those coming from the ID field
-        args_id.update(args)
-        args = args_id
+    # # Use ID as a source of parameters as well.
+    # id_str: str = args['--id']
+    # if id_str:
+    #     argv = id2argv(id_str)
+    #     args_id = docpie(__doc__, argv=argv, version='3.0.0')
+    #
+    #     print('passed id')
+    #     print(id_str)
+    #     print('passed arguments in id')
+    #     print(args_id)
+    #
+    #     # Parameters explicitly coming from ID have a higher priority
+    #     args.update(args_id)
+    #     print('arguments after update')
+    #     print(args)
 
     # Testing purpose
     if test_params is not None:
@@ -101,7 +108,7 @@ def main(test_params: Dict = None):
     summary_file = open(summary_file_str, 'w')
     args['summary'] = summary_file
 
-    n = int(args['--numOpinions'])
+    num_opinions = int(args['--numOpinions'])
     fixed_reference_ids_set = find_fixed_references_ids(graph_manager, args)
     all_opinion_ids = list(range(len(opinion_manager.opinions)))
     all_fixed_opinion_ids = sorted(list({opinion_manager.opinion_id_from_ref_id(i) for i in fixed_reference_ids_set}))
@@ -140,11 +147,11 @@ def main(test_params: Dict = None):
     tie_breaking_rule: TieBreakingRule = LexicographicalTieBreakingRule()
     voting_rule: VotingRule = PositionalScoringRule()
 
-    all_distances = np.ndarray(shape=(n, n), dtype=float)
-    to_calculate_dist = np.ndarray((n, n), dtype=bool)
+    all_distances = np.ndarray(shape=(num_opinions, num_opinions), dtype=float)
+    to_calculate_dist = np.ndarray((num_opinions, num_opinions), dtype=bool)
     to_calculate_dist.fill(False)
     for i in all_already_selected_candidates_ids:
-        for j in range(n):
+        for j in range(num_opinions):
             if i == j:
                 continue
             to_calculate_dist[i, j] = to_calculate_dist[j, i] = True
