@@ -19,9 +19,12 @@ from opinions.simulate.votingClasses import *
 
 NUM_EXPERIMENTS = 50
 float_and_delimiter = '%8.5E\t'
-utility_functions: List[Utility] = [ExponentialBordaUtility(), PluralityUtility(), VetoUtility()]
+utilities: List[Tuple[Utility, str]] = [(ExponentialBordaUtility(), 'xb'), (PluralityUtility(), 'p'),
+                                        (VetoUtility(), 'v')]
 tie_breaking_rule: TieBreakingRule = LexicographicalTieBreakingRule()
 voting_rule: VotingRule = PositionalScoringRule()
+num_candidates = [3, 6]
+candidates_sources = ["100%F", "50%F", "0%F"]
 
 
 def main(test_params: Dict = None):
@@ -119,31 +122,34 @@ def main(test_params: Dict = None):
     all_fixed_opinion_ids = sorted(list({opinion_manager.opinion_id_from_ref_id(i) for i in fixed_reference_ids_set}))
     all_mobile_opinion_ids = sorted(list(set(all_opinion_ids) - set(all_fixed_opinion_ids)))
 
-    list_of_fifty_lists_of_candidates_ids: List[List[List[int]]] = []
-    for target_num_candidates in [3, 6]:
+    list_of__num_experiments__lists_of_candidates_ids: List[List[List[int]]] = []
+    for target_num_candidates in num_candidates:
         if target_num_candidates > len(all_fixed_opinion_ids):
             print("%s has only %d fully fixed candidates. Not processed." % (run_id, len(all_fixed_opinion_ids)))
             return
-        fifty_lists_of_combinations_of_x_candidates_all_from_fixed: List[List[int]] = give_me_x_different_combinations(
-            all_fixed_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
-        fifty_lists_of_combinations_of_x_candidates_half_from_fixed: List[List[int]] = []
-        fifty_lists_of_combinations_of_x_candidates_none_from_fixed: List[List[int]] = give_me_x_different_combinations(
-            all_mobile_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
+        num_experiments__lists_of_combinations_of_x_candidates_all_from_fixed: List[List[int]] = \
+            give_me_x_different_combinations(all_fixed_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
+        num_experiments__lists_of_combinations_of_x_candidates_half_from_fixed: List[List[int]] = []
+        num_experiments__lists_of_combinations_of_x_candidates_none_from_fixed: List[List[int]] = \
+            give_me_x_different_combinations(all_mobile_opinion_ids, target_num_candidates, NUM_EXPERIMENTS, random)
         half_target_num_candidates = int(1.0 * target_num_candidates / 2.0)
 
         for i in range(NUM_EXPERIMENTS):
             fixed_half = give_me_x_different_combinations(all_fixed_opinion_ids, half_target_num_candidates, 1, random)
             mobile_half = give_me_x_different_combinations(
                 all_mobile_opinion_ids, target_num_candidates - half_target_num_candidates, 1, random)
-            fifty_lists_of_combinations_of_x_candidates_half_from_fixed.append(fixed_half[0] + mobile_half[0])
+            num_experiments__lists_of_combinations_of_x_candidates_half_from_fixed.append(fixed_half[0] + mobile_half[0])
 
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_all_from_fixed)
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_half_from_fixed)
-        list_of_fifty_lists_of_candidates_ids.append(fifty_lists_of_combinations_of_x_candidates_none_from_fixed)
+        list_of__num_experiments__lists_of_candidates_ids.append(
+            num_experiments__lists_of_combinations_of_x_candidates_all_from_fixed)
+        list_of__num_experiments__lists_of_candidates_ids.append(
+            num_experiments__lists_of_combinations_of_x_candidates_half_from_fixed)
+        list_of__num_experiments__lists_of_candidates_ids.append(
+            num_experiments__lists_of_combinations_of_x_candidates_none_from_fixed)
 
     all_already_selected_candidates_ids: Set[int] = set()
     list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]] = []
-    for lst in chain(*list_of_fifty_lists_of_candidates_ids):
+    for lst in chain(*list_of__num_experiments__lists_of_candidates_ids):
         all_already_selected_candidates_ids.update(lst)
         list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists.append(
             (lst, sorted(list(set(all_opinion_ids) - set(lst)))))
@@ -234,20 +240,18 @@ def main(test_params: Dict = None):
                 all_distances[i, j] = all_distances[j, i] = distance  # because the candidate may be a voter some day
 
         if not step_index:  # if step == 0:
-            print_header(utility_functions, list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists,
-                         True, out_file)
-            print_header(utility_functions, list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists,
-                         False, summary_file)
+            print_header(utilities, list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists, True, out_file)
+            print_header(utilities, list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists, False, summary_file)
 
         mean, variance = 0.0, 0.0
 
         out_file.write('%04d\t' % step_index)
         summary_file.write('%04d\t' % step_index)
-        for utility_function in utility_functions:
+        for util_function, util_name in utilities:
             for i in range(len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)):
                 index_in_group = i % NUM_EXPERIMENTS
                 iteration_candidate_ids, iteration_voters_ids = list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists[i]
-                winner_id = elect(all_distances, step_index, tie_breaking_rule, voting_rule, utility_function,
+                winner_id = elect(all_distances, step_index, tie_breaking_rule, voting_rule, util_function,
                                   iteration_candidate_ids, iteration_voters_ids)
 
                 numerator = 0.0
@@ -428,34 +432,34 @@ def interval_reference_distance(opinion_i: IntervalOpinion, point_cj: Reference,
     return y_c.distance_to(point_cj)
 
 
-def print_header(utility_functions: List[Utility],
+def print_header(utilities: List[Tuple[Utility, str]],
                  list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]],
                  extended: bool, out_file):
     out_file.write('step\t')
-    utility_names = ['xb', 'p', 'v']
-    candidates = [3, 6]
-    source = ["100%F", "50%F", "0%F"]
     # individual_id: List[str] = []
     # group_size, max = None, None
+    utility_names = [name for fun, name in utilities]
     if extended:
         group_size = NUM_EXPERIMENTS
         individual_id = [str(i + 1) for i in range(NUM_EXPERIMENTS)]
-        header_limit = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
+        header_limit = len(utilities) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)
     else:
         group_size = 2
         individual_id = ['M', 'V']
-        header_limit = len(utility_functions) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) // \
-                       NUM_EXPERIMENTS * group_size
+        header_limit = len(utilities) * len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists) * group_size \
+                       // NUM_EXPERIMENTS
 
+    len_candidates_sources = len(candidates_sources)
+    len_candidates = (len(num_candidates) * len_candidates_sources)
     for i in range(header_limit):
         individual_index = i % group_size
-        reminder = i // group_size
-        utility_index = reminder // 6
-        reminder %= 6
-        candidates_no = reminder // 3
-        reminder %= 3
-        out_file.write("U%s_C%d_%s_%s\t" % (utility_names[utility_index], candidates[candidates_no], source[reminder],
-                                            individual_id[individual_index]))
+        whole_batch = i // group_size  # includes all utilities * all candidate sources * num of candidates
+        utility_index = whole_batch // len_candidates
+        batch_candidates = whole_batch % len_candidates
+        num_candidates_id = batch_candidates // len_candidates_sources
+        candidates_source_id = batch_candidates % len_candidates_sources  # 3 here: 100%, 50%, 0%
+        out_file.write("U%s_C%d_%s_%s\t" % (utility_names[utility_index], num_candidates[num_candidates_id],
+                                            candidates_sources[candidates_source_id], individual_id[individual_index]))
 
     out_file.write('\n')
 
