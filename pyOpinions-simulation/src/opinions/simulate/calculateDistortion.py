@@ -1,4 +1,6 @@
 import os
+
+import math
 import sys
 from itertools import chain
 from pickle import UnpicklingError
@@ -17,6 +19,9 @@ from opinions.simulate.votingClasses import *
 
 NUM_EXPERIMENTS = 50
 float_and_delimiter = '%8.5E\t'
+utility_functions: List[Utility] = [ExponentialBordaUtility(), PluralityUtility(), VetoUtility()]
+tie_breaking_rule: TieBreakingRule = LexicographicalTieBreakingRule()
+voting_rule: VotingRule = PositionalScoringRule()
 
 
 def main(test_params: Dict = None):
@@ -143,10 +148,6 @@ def main(test_params: Dict = None):
         list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists.append(
             (lst, sorted(list(set(all_opinion_ids) - set(lst)))))
 
-    utility_functions: List[Utility] = [ExponentialBordaUtility(), PluralityUtility(), VetoUtility()]
-    tie_breaking_rule: TieBreakingRule = LexicographicalTieBreakingRule()
-    voting_rule: VotingRule = PositionalScoringRule()
-
     all_distances = np.ndarray(shape=(num_opinions, num_opinions), dtype=float)
     to_calculate_dist = np.ndarray((num_opinions, num_opinions), dtype=bool)
     to_calculate_dist.fill(False)
@@ -249,20 +250,22 @@ def main(test_params: Dict = None):
                 winner_id = elect(all_distances, step_index, tie_breaking_rule, voting_rule, utility_function,
                                   iteration_candidate_ids, iteration_voters_ids)
 
-                nominator = 0.0
+                numerator = 0.0
                 min_sum_distances = 9000000000  # TODO change
                 for candidate_id in iteration_candidate_ids:
                     sum_distances = 0.0
                     for voter_id in iteration_voters_ids:
                         sum_distances += all_distances[candidate_id, voter_id]
-                    # Find the nominator (sum of distances per winner)
+                    # Find the numerator (sum of distances per winner)
                     if candidate_id == winner_id:
-                        nominator = sum_distances
+                        numerator = sum_distances
                     # Find denominator (minimum sum of distances)
                     if sum_distances < min_sum_distances:
                         min_sum_distances = sum_distances
 
-                distortion = nominator / min_sum_distances
+                # distortion = numerator / min_sum_distances
+                distortion = (-13.815510557964274 if (numerator <= 1e-6) else math.log(numerator)) - \
+                             (-13.815510557964274 if (min_sum_distances <= 1e-6) else math.log(min_sum_distances))
                 mean += distortion
                 variance += distortion**2
                 out_file.write(float_and_delimiter % distortion)
