@@ -19,8 +19,8 @@ from opinions.simulate.votingClasses import *
 
 NUM_EXPERIMENTS = 50
 float_and_delimiter = '%8.5E\t'
-utilities: List[Tuple[Utility, str]] = [(ExponentialBordaUtility(), 'xb'), (PluralityUtility(), 'p'),
-                                        (VetoUtility(), 'v')]
+utilities: List[Tuple[Utility, str]] = [(ExponentialBordaUtility(), 'xb'), (LinearBordaUtility(), 'lb'),
+                                        (PluralityUtility(), 'p'), (VetoUtility(), 'v')]
 tie_breaking_rule: TieBreakingRule = LexicographicalTieBreakingRule()
 voting_rule: VotingRule = PositionalScoringRule()
 num_candidates = [3, 6]
