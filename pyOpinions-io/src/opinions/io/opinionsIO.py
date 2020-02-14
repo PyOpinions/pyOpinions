@@ -106,16 +106,16 @@ class OpinionsIO (SimulationListener):
     def simulation_started(self, state):
         self.xPickler.dump(state)
 
-    def retrieve_step_and_x(self) -> Tuple[int, np.ndarray]:
+    def retrieve_step_delta_and_x(self) -> Tuple[int, float, np.ndarray]:
         return self.xUnpickler.load()
 
     def update(self, state):
         # later add the ability to store change in topology graph
-        if len(state) == 2:
+        if len(state) == 3:
             self.xPickler.dump(state)
-        elif len(state) > 2:
-            self.xPickler.dump((state[0], state[1]))
-            self.topologyPickler.dump(state[2])
+        elif len(state) > 3:
+            self.xPickler.dump((state[0], state[1], state[2]))
+            self.topologyPickler.dump(state[3])
         else:
             raise RuntimeError('Unknown state length / structure : ' + str(state))
 

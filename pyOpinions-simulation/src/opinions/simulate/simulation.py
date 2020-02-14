@@ -65,11 +65,12 @@ class Simulation(Thread):
         updates = complex_dynamics_d.calculate_update(graphs)
         d = complex_dynamics_d.aggregate_dynamics(updates)
         # normalize_matrix(d)  # Already called inside aggregate_dynamics(updates)
+        max_delta = 0
 
         if verbose:
             self.print_x_and_d(step, x, d)  # i.e. to the stdout
         for listener in self.listeners:
-            listener.simulation_started((step, x))
+            listener.simulation_started((step, max_delta, x))
 
         while forever or step < end_step:
             # now I have transformation (effects) matrix and x (opinions) matrix
@@ -79,8 +80,8 @@ class Simulation(Thread):
             temp_x = d @ x
 
             # calculate the total system update (total absolute distance)
-            total_abs_dist = max_distance_between(x, temp_x)
-            converged = total_abs_dist < DEFAULT_CONVERGENCE_PRECISION  # (oneOverNSquare / step)
+            max_delta = max_distance_between(x, temp_x)
+            converged = max_delta < DEFAULT_CONVERGENCE_PRECISION  # (oneOverNSquare / step)
 
             normalize_matrix(temp_x)
             x[:, :] = temp_x[:, :]
@@ -90,7 +91,7 @@ class Simulation(Thread):
             # normalize_matrix(d)  # Already called inside aggregate_dynamics(updates)
 
             # ==============simulation step proper ends here ================
-            print('Step = %d, Total Diff = %8.5E, Converged = %r' % (step, total_abs_dist, converged))
+            print('Step = %d, Total Diff = %8.5E, Converged = %r' % (step, max_delta, converged))
 
             if verbose:
                 # self.print_x_and_d(step, x, d)
@@ -98,7 +99,7 @@ class Simulation(Thread):
             # self.print_x_and_d(step, x, d, file=xFile)
             for listener in self.listeners:
                 # listener.update((step, x))
-                listener.update((step, temp_x))  # TODO Using temp_x instead of x is a work around, not a final solution
+                listener.update((step, max_delta, temp_x))  # TODO Using temp_x instead of x is a work around, not a final solution
 
             if converged:
                 break
@@ -106,7 +107,7 @@ class Simulation(Thread):
             step += 1
         self.current_step = step
         for listener in self.listeners:
-            listener.simulation_ended((step, x))
+            listener.simulation_ended((step, max_delta, x))
 
     def print_x_and_d(self, step: int, x: np.ndarray, d: np.ndarray, file=None):
         # TODO Move function to somewhere else (another helper class)

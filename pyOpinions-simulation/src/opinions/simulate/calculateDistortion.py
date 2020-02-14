@@ -168,9 +168,10 @@ def main(test_params: Dict = None):
     step_index, prev_step = 0, 0 - skip
     more_to_parse = True
     current_state = None
+    max_delta = None
     while more_to_parse:
         try:
-            step_index, current_state = opinions_i.retrieve_step_and_x()
+            step_index, max_delta, current_state = opinions_i.retrieve_step_delta_and_x()
         except (EOFError, UnpicklingError):
             more_to_parse = False
 
@@ -246,7 +247,9 @@ def main(test_params: Dict = None):
         mean, variance = 0.0, 0.0
 
         out_file.write('%04d\t' % step_index)
+        out_file.write(float_and_delimiter % max_delta)
         summary_file.write('%04d\t' % step_index)
+        summary_file.write(float_and_delimiter % max_delta)
         for util_function, util_name in utilities:
             for i in range(len(list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists)):
                 index_in_group = i % NUM_EXPERIMENTS
@@ -435,7 +438,7 @@ def interval_reference_distance(opinion_i: IntervalOpinion, point_cj: Reference,
 def print_header(utilities: List[Tuple[Utility, str]],
                  list_of_fifty_pairs_of_candidates_id_lists_and_voter_id_lists: List[Tuple[List[int], List[int]]],
                  extended: bool, out_file):
-    out_file.write('step\t')
+    out_file.write('step\tmaxDelta\t')
     # individual_id: List[str] = []
     # group_size, max = None, None
     utility_names = [name for fun, name in utilities]
