@@ -5,8 +5,7 @@ from random import Random
 from typing import Dict, List, Sequence, Union
 
 import numpy as np
-from networkx import DiGraph, Graph
-
+import networkx as nx
 from docpie import docpie
 from opinions.graph.graphs import GraphManager
 from opinions.io.opinionsIO import OpinionsIO
@@ -73,7 +72,7 @@ def polarize_opinions(egoistics: Union[Sequence[int], Sequence[Opinion]], poles:
             move_to_pole(ref, poles[index_of_next_target], nu)
 
 
-def find_stubborn_ids(g: Graph) -> List[int]:
+def find_stubborn_ids(g: nx.graph.Graph) -> List[int]:
     return [i for i in g.nodes if g.in_degree(i) == 0]
 
 
@@ -118,7 +117,7 @@ Options:
   --verbose                 Prints a lot of information details.
 """
 
-  # --egoisticPortion=EGOPOR  How much % of the total opinions are egoistic   [Default: 0.1]
+    # --egoisticPortion=EGOPOR  How much % of the total opinions are egoistic   [Default: 0.1]
 
     # args = docopt(doc, version='3.0.0')
     args = docpie(doc, version='3.0.0')
